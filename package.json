@@ -1,0 +1,14 @@
+{
+  "name": "form-builder",
+  "version": "0.0.1-alpha",
+  "description": "Save forms as JSON data",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nigel Harsch",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
