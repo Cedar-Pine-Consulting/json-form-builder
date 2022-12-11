@@ -41,14 +41,14 @@ services:
       # When the PostgresSQL container is started it will run any scripts
       # provided in the `docker-entrypoint-initdb.d` directory, this connects
       # our seed file to that directory so that it gets run
-      - ./database-seed.sql:/docker-entrypoint-initdb.d/database-seed.sql
+      - ./src/sqls/initialize-schema.sql:/docker-entrypoint-initdb.d/initialize-schema.sql
 
   # PostgreSQL pgAdmin panel accessible at http://localhost:16543/
   pgadmin-compose:
     image: dpage/pgadmin4
     environment:
-      PGADMIN_DEFAULT_EMAIL: "placeholder@example.com"
-      PGADMIN_DEFAULT_PASSWORD: "fakepassword123!"
+      PGADMIN_DEFAULT_EMAIL: "admin@admin.admin"
+      PGADMIN_DEFAULT_PASSWORD: "admin"
     ports:
       - "16543:80"
     depends_on:
