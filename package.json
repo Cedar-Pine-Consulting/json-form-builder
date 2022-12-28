@@ -1,7 +1,7 @@
 {
-  "name": "js_template",
+  "name": "json_form_builder",
   "version": "1.0.0",
-  "description": "template for full stack js app",
+  "description": "proof of conecpt for full stack form builder app",
   "main": "index.js",
   "scripts": {
     "build": "cd client && npm run build && cd ..",
@@ -13,7 +13,7 @@
     "start-prod": "NODE_ENV=production nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Mark Sarkis",
+  "author": "Cedar Pine Consulting",
   "license": "ISC",
   "dependencies": {
     "argon2": "^0.29.1",

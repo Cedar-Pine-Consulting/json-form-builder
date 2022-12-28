@@ -8,9 +8,10 @@ services:
             POSTGRES_USER: postgres
             POSTGRES_DB: test
             POSTGRES_PASSWORD: ''
+            # TODO: change this before deploying
             POSTGRES_HOST_AUTH_METHOD: 'trust'
-        volumes:
-            - ./pgdata:/var/lib/postgresql/data
+        # volumes:
+            # - ./pgdata:/var/lib/postgresql/data
             # execute sql files in specific order using #-fileName syntax when creating new DB - examples below
             # - ./src/database/initDb.sql:/docker-entrypoint-initdb.d/0-initDb.sql
             # - ./src/database/addData.sql:/docker-entrypoint-initdb.d/1-addData.sql
