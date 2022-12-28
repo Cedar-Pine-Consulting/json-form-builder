@@ -1,21 +1,40 @@
-FROM node:14-alpine3.12
+#####################################
+# BUILD FRONT-END
+#####################################
+FROM node:16.17-alpine as frontend
 
-# Create app directory
-WORKDIR /usr/src/app
+WORKDIR /client
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-# copying packages first helps take advantage of docker layers
-COPY package*.json ./
+# Install dependencies
+COPY client/package.json ./
+COPY client/package-lock.json ./
+RUN npm i
 
-RUN npm install
-# If you are building your code for production
-# RUN npm ci --only=production
+# Build the react app
+COPY client ./
+RUN npm run build
+# RUN npm run start
 
-# Bundle app source
-COPY . .
 
-EXPOSE 8080
+#####################################
+# BUILD BACKEND
+#####################################
+FROM node:16.17-alpine as backend
 
-CMD [ "npm", "run", "start" ]
+WORKDIR /app
+
+# Install dependencies
+COPY package.json ./
+COPY package-lock.json ./
+RUN npm i
+
+COPY . ./
+
+
+# Copy the client
+COPY --from=frontend /client ./client
+
+RUN npm install --global nodemon
+
+# RUN npm run migrate
+ENTRYPOINT ./entrypoint.sh

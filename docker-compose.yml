@@ -1,55 +1,42 @@
-version: '3.8'
+version: '3.7'
 services:
-  # These are the configurations for our Node app
-  # When Docker Compose starts this container it will automatically
-  # use the Dockerfile in the directory to configure it
-  app:
-    build: .
-    depends_on:
-      # Our app does not work without our database
-      # so this ensures our database is loaded first
-      - postgres
-    ports:
-      - "8080:8080"
-    volumes:
-      # Maps our current project directory `.` to
-      # our working directory in the container
-      - ./:/usr/src/app/
-      # node_modules workaround for volumes
-      # https://stackoverflow.com/a/32785014
-      - /usr/src/app/node_modules
-
-  # This is the configuration for our PostgreSQL database container
-  # Note the `postgres` name is important, in out Node app when we refer
-  # to  `host: "postgres"` that value is mapped on the network to the 
-  # address of this container.
-  postgres:
-    image: postgres:14.1-alpine
-    restart: always
-    environment:
-      # You can set the value of environment variables
-      # in your docker-compose.yml file
-      # Our Node app will use these to connect
-      # to the database
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=root
-      - POSTGRES_DB=root
-    ports:
-      # Standard port for PostgreSQL databases
-      - "5432:5432"
-    volumes:
-      # When the PostgresSQL container is started it will run any scripts
-      # provided in the `docker-entrypoint-initdb.d` directory, this connects
-      # our seed file to that directory so that it gets run
-      - ./src/sqls/initialize-schema.sql:/docker-entrypoint-initdb.d/initialize-schema.sql
-
-  # PostgreSQL pgAdmin panel accessible at http://localhost:16543/
-  pgadmin-compose:
-    image: dpage/pgadmin4
-    environment:
-      PGADMIN_DEFAULT_EMAIL: "admin@admin.admin"
-      PGADMIN_DEFAULT_PASSWORD: "admin"
-    ports:
-      - "16543:80"
-    depends_on:
-      - postgres
+    db:
+        image: postgres:13.4
+        restart: always
+        user: postgres
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_DB: test
+            POSTGRES_PASSWORD: ''
+            POSTGRES_HOST_AUTH_METHOD: 'trust'
+        volumes:
+            - ./pgdata:/var/lib/postgresql/data
+            # execute sql files in specific order using #-fileName syntax when creating new DB - examples below
+            # - ./src/database/initDb.sql:/docker-entrypoint-initdb.d/0-initDb.sql
+            # - ./src/database/addData.sql:/docker-entrypoint-initdb.d/1-addData.sql
+            # - ./src/database/addAttributes.sql:/docker-entrypoint-initdb.d/2-addAttributesdData.sql
+        ports:
+            - '5433:5432'
+    backend:
+        build: '.'
+        # build: './'
+        # for local development uncomment below and change ports to "3000:3000"
+        # you will also need to change Dockerfile to expose 3000 and script to `npm run dev`
+        # ^  npm run start instead of npm run dev? also check chokidar_usepolling = true for local react dev work
+        # https://stackoverflow.com/questions/44643045/running-development-server-with-create-react-app-inside-of-a-docker-container
+        volumes:
+            - ./client:/app/client
+            - ./client/node_modules:/app/client/node_modules
+            - .:/app
+            - node_modules:/app/node_modules
+        links:
+            - 'db'
+        depends_on:
+            - db
+        ports:
+            - '3001:3001'
+            - '3000:3000'
+        environment:
+          DB_HOST: db
+volumes:
+    node_modules:
