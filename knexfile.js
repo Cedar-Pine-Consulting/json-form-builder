@@ -10,5 +10,8 @@ module.exports = {
   },
   seeds: {
     directory: './knex/seeds',
+  },
+  migrations: {
+    directory: './knex/migrations',
   }
 }

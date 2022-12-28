@@ -23,18 +23,11 @@ FROM node:16.17-alpine as backend
 
 WORKDIR /app
 
-# Install dependencies
-COPY package.json ./
-COPY package-lock.json ./
-RUN npm i
-
-COPY . ./
-
-
-# Copy the client
-COPY --from=frontend /client ./client
-
 RUN npm install --global nodemon
 
-# RUN npm run migrate
-ENTRYPOINT ./entrypoint.sh
+# Install app dependencies
+COPY package.json /app/package.json
+RUN npm install
+
+# Add source
+COPY ./ /app/

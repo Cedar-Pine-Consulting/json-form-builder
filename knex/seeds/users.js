@@ -5,14 +5,7 @@ const hashPwd = (password) => argon2.hash(password);
 
 exports.seed = async function(knex) {
   // Deletes ALL existing entries if needed
-  // TODO: how to delete user table only if it exists?
-  await knex.schema.dropTableIfExists('users');
-  await knex.schema.createTable('users', function (table) {
-    table.increments();
-    table.string('email');
-    table.string('password');
-  })
-
+  await knex('users').del();
   // insert seed entries
   await knex('users').insert([
     {email: 'mark@cedarpineconsulting.com', password: await hashPwd(pwdRaw)},
