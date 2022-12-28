@@ -23,6 +23,13 @@ services:
           - db
         command: npm run migrate
 
+    frontend:
+        build:
+          context: .
+          target: frontend
+        volumes:
+            - ./client/build:/client/build
+
     backend:
         build:
           context: .
@@ -34,6 +41,7 @@ services:
         depends_on:
             - db
             - migration
+            - frontend
         ports:
             - '3001:3001'
             - '3000:3000'

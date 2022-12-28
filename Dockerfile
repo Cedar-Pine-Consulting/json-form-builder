@@ -12,8 +12,7 @@ RUN npm i
 
 # Build the react app
 COPY client ./
-RUN npm run build
-# RUN npm run start
+CMD ["npm", "run", "build"]
 
 
 #####################################
@@ -30,4 +29,5 @@ COPY package.json /app/package.json
 RUN npm install
 
 # Add source
+COPY ./middleware /app/middleware
 COPY ./ /app/
