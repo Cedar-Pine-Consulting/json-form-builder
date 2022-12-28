@@ -1,8 +1,18 @@
-# This project is under construction and just done for fun and practice
+# JSON Form Builder
+
+Builing forms with jsonforms.io, ajv.js and postgres JSON fields.
+
 
 ## TODO:
 
-- add knexfile info to readme, remove todos
+### App:
+- install jsonforms.io seed app
+- build form tables
+- build form rest views
+- use AJV for server side form validation
+
+### Housekeeping
+- actions all `TODO`s in code
 - add SASS + styles
 - add jest unit tests
 - add husky + prettier hooks
