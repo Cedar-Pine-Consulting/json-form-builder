@@ -25,9 +25,10 @@ WORKDIR /app
 RUN npm install --global nodemon
 
 # Install app dependencies
-COPY package.json /app/package.json
+COPY server/package.json ./
+COPY server/package-lock.json ./
 RUN npm install
 
 # Add source
-COPY ./middleware /app/middleware
-COPY ./ /app/
+COPY ./server/src/ ./src
+CMD ["npm", "run", "start"]

@@ -17,8 +17,6 @@ services:
         build:
           context: .
           target: backend
-        volumes:
-          - .:/app
         depends_on:
           - db
         command: npm run migrate
@@ -28,14 +26,18 @@ services:
           context: .
           target: frontend
         volumes:
-            - ./client/build:/client/build
+            - build:/client/build
+            - ./client/src:/client/src
+            - ./client/public:/client/public
+        command: npm run start
 
     backend:
         build:
           context: .
           target: backend
         volumes:
-            - .:/app
+            - ./server/src:/app/src
+            - build:/app/client/build
         links:
             - 'db'
         depends_on:
@@ -48,3 +50,6 @@ services:
         environment:
           DB_HOST: db
         command: npm run start
+
+volumes:
+    build:

@@ -2,7 +2,7 @@ const fs = require('fs');
 const koaStatic = require('koa-static');
 
 // path to the react app build folder to serve minified app
-const FRONTEND_BUILD_PATH = `${__dirname}/../client/build`;
+const FRONTEND_BUILD_PATH = `${__dirname}/../../client/build`;
 
 function shouldServeIndexHtml(path) {
     if (path === '/index.html') {

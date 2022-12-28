@@ -2,7 +2,7 @@
   "name": "json_form_builder",
   "version": "1.0.0",
   "description": "proof of conecpt for full stack form builder app",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "build": "cd client && npm run build && cd ..",
     "migrate": "npx knex migrate:latest",
@@ -10,8 +10,8 @@
     "migrate": "npx knex migrate:latest",
     "refresh": "npx knex migrate:rollback && npx knex migrate:latest",
     "start-local": "NODE_ENV=local nodemon index.js",
-    "start": "nodemon index.js",
-    "start-prod": "NODE_ENV=production nodemon index.js",
+    "start": "nodemon src/index.js",
+    "start-prod": "NODE_ENV=production nodemon src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Cedar Pine Consulting",
