@@ -29,7 +29,8 @@ services:
             - build:/client/build
             - ./client/src:/client/src
             - ./client/public:/client/public
-        command: npm run start
+            - ./client/scripts:/client/scripts
+        command: npm run watch
 
     backend:
         build:
@@ -46,7 +47,6 @@ services:
             - frontend
         ports:
             - '3001:3001'
-            - '3000:3000'
         environment:
           DB_HOST: db
         command: npm run start

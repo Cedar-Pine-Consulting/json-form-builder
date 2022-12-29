@@ -18,7 +18,7 @@ function Login () {
 
     return (
         <span className="login">
-            <h2>test</h2>
+            {/* <h2>test</h2> */}
             <h1>Log In To Form Builder</h1>
             <input className="login__field"placeholder="email" name="username" onChange={e => setEmail(e.target.value)}/> <br/>
             <input className="login__field" placeholder="password" name="password" type="password" onChange={e => setPassword(e.target.value)}/> <br/>
