@@ -15,7 +15,8 @@
     "@jsonforms/core": "^3.0.0",
     "@jsonforms/material-renderers": "^3.0.0",
     "@jsonforms/react": "^3.0.0",
-    "@jsonforms/examples": "^3.0.0"
+    "@jsonforms/examples": "^3.0.0",
+    "@ginkgo-bioworks/react-json-schema-form-builder": "^2.10.1"
   },
   "scripts": {
     "start": "react-scripts start",
