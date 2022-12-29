@@ -1,7 +1,7 @@
 // import logo from './logo.svg';
 import { Toaster } from 'react-hot-toast';
 import './App.css';
-import Login from './components/Login';
+import Form from './components/Form';
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
         </a>
       </header> */}
       <Toaster/>
-      <Login />
+      <Form />
     </div>
   );
 }
