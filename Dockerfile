@@ -5,6 +5,9 @@ FROM node:16.17-alpine as frontend
 
 WORKDIR /client
 
+# add `/app/node_modules/.bin` to $PATH
+ENV PATH /app/node_modules/.bin:$PATH
+
 # Install dependencies
 COPY client/package.json ./
 COPY client/package-lock.json ./
@@ -20,15 +23,14 @@ CMD ["npm", "run", "build"]
 #####################################
 FROM node:16.17-alpine as backend
 
+# add `/app/node_modules/.bin` to $PATH
+ENV PATH /app/node_modules/.bin:$PATH
+
 WORKDIR /app
 
 RUN npm install --global nodemon
 
-# Install app dependencies
-COPY server/package.json ./
-COPY server/package-lock.json ./
-RUN npm install
-
 # Add source
-COPY ./server/src/ ./src
+COPY ./server ./
+RUN npm install
 CMD ["npm", "run", "start"]

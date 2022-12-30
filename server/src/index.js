@@ -33,12 +33,14 @@ app.use(errorHandler);
 // routes
 const healthRouter = require('./routes/healthRouter.js');
 const userRouter = require('./routes/userRouter.js');
+const formRouter = require('./routes/formRouter.js');
 
 
 // ------------ Route Definitions -----------------------------
 
 app.use(healthRouter.routes());
 app.use(userRouter.routes());
+app.use(formRouter.routes());
 
 
 // error handler via sentry once you set up a personal account

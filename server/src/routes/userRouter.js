@@ -2,7 +2,7 @@ const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
 const Router = require('koa-router');
 const router = new Router();
-const knex = require('../knex/knex.js');
+const knex = require('../../knex/knex.js');
 
 // TODO: add middleware to be sure only certain roles + user can access this info
 // get user ID
@@ -26,12 +26,12 @@ router.get('/api/user/:id', async ctx => {
             ctx.app.emit('error', error, ctx);
         });
     if(!user) {
+        // console.log("no user found");
         return ctx.throw(400, 'User not found!');
     }
     return ctx.body = user;
 });
 
-// endpoint for signing in to the app
 router.post('/api/user/signin', async ctx => {
     // check if user exists
     const result = await knex('users')

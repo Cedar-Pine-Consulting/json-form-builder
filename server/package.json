@@ -7,7 +7,6 @@
     "build": "cd client && npm run build && cd ..",
     "migrate": "npx knex migrate:latest",
     "seed": "npx knex seed:run",
-    "migrate": "npx knex migrate:latest",
     "refresh": "npx knex migrate:rollback && npx knex migrate:latest",
     "start-local": "NODE_ENV=local nodemon index.js",
     "start": "nodemon src/index.js",

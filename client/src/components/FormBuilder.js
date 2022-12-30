@@ -17,11 +17,10 @@ class FormBuilderApp extends Component {
                 schema={this.state.schema}
                 uischema={this.state.uischema}
                 onChange={(newSchema: string, newUiSchema: string) => {
-                this.setState({
-                    schema: newSchema,
-                    uischema: newUiSchema
-                }
-                )
+                    this.setState({
+                        schema: newSchema,
+                        uischema: newUiSchema
+                    })
                 }}
             />
           <table>
