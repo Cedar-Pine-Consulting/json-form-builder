@@ -19,7 +19,7 @@ services:
           target: backend
         depends_on:
           - db
-        command: npm run migrate
+        command: npm run bootstap-db
         volumes:
           - ./server/knex/migrations:/app/knex/migrations
           - ./server/knex/seeds:/app/knex/seeds

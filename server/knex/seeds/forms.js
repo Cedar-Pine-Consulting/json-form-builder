@@ -4,6 +4,7 @@ exports.seed = async function(knex) {
   // insert seed entries
   await knex('formschema').insert([
     {
+      id: 1,
       name: "TestForm",
       schema: {
         "type": "object",
