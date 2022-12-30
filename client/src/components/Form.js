@@ -4,26 +4,25 @@ import {
   materialRenderers,
   materialCells,
 } from '@jsonforms/material-renderers';
-import { person } from '@jsonforms/examples';
 
-const initialData = {}
 
 function Form() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [formSchema, setFormSchema] = useState([]);
-  const [data, setData] = useState(initialData);
+  const [data, setData] = useState({});
 
   // Note: the empty deps array [] means
   // this useEffect will run once
   // similar to componentDidMount()
   useEffect(() => {
-    fetch("/api/formschema/1")
+    // TODO: dynamically set form ID
+    fetch("/api/formschema/")
       .then(res => res.json())
       .then(
         (result) => {
           setIsLoaded(true);
-          setFormSchema(result);
+          setFormSchema(result[0]);
         },
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
