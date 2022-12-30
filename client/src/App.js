@@ -1,8 +1,8 @@
 // import logo from './logo.svg';
 import { Toaster } from 'react-hot-toast';
 import './App.css';
-// import Form from './components/Form';
-import FormBuilderApp from './components/FormBuilder';
+import Form from './components/Form';
+// import FormBuilderApp from './components/FormBuilder';
 
 function App() {
   return (
@@ -22,8 +22,8 @@ function App() {
         </a>
       </header> */}
       <Toaster/>
-      {/* <Form /> */}
-      <FormBuilderApp />
+      <Form />
+      {/* <FormBuilderApp /> */}
     </div>
   );
 }
