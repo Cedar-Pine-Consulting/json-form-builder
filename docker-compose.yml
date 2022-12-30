@@ -21,8 +21,8 @@ services:
           - db
         command: npm run migrate
         volumes:
-          - ./server/src/knex/migrations:/app/src/knex/migrations
-          - ./server/src/knex/seeds:/app/src/knex/seeds
+          - ./server/knex/migrations:/app/knex/migrations
+          - ./server/knex/seeds:/app/knex/seeds
 
     frontend:
         build:
