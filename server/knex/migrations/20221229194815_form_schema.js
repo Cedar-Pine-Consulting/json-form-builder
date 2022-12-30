@@ -3,7 +3,7 @@
  * @returns { Promise<void> }
  */
 exports.up = function(knex) {
-    return knex.schema.createTable('FormSchema', function(table) {
+    return knex.schema.createTable('formschema', function(table) {
         table.increments();
         table.string('name').unique().notNullable();
         table.json('schema').notNullable();
@@ -20,5 +20,5 @@ exports.up = function(knex) {
  * @returns { Promise<void> }
  */
 exports.down = function(knex) {
-     return knex.schema.dropTable('FormSchema');
+     return knex.schema.dropTable('formschema');
 };

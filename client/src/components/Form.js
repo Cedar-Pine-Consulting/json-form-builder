@@ -18,7 +18,7 @@ function Form() {
   // this useEffect will run once
   // similar to componentDidMount()
   useEffect(() => {
-    fetch("/api/FormSchema/2")
+    fetch("/api/formschema/1")
       .then(res => res.json())
       .then(
         (result) => {

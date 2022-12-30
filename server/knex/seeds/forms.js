@@ -1,8 +1,8 @@
 exports.seed = async function(knex) {
   // Deletes ALL existing entries if needed
-  await knex('FormSchema').del();
+  await knex('formschema').del();
   // insert seed entries
-  await knex('FormSchema').insert([
+  await knex('formschema').insert([
     {
       name: "TestForm",
       schema: {

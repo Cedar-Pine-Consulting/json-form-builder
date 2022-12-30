@@ -5,7 +5,7 @@ const knex = require('../../knex/knex.js');
 // TODO: add middleware to be sure only certain roles + user can access this info
 // get user ID
 router.get('/api/formschema/:id', async ctx => {
-    const formSchema = await knex('FormSchema')
+    const formSchema = await knex('formschema')
         .select({
             id: 'id',
             schema: 'schema',
@@ -26,7 +26,7 @@ router.get('/api/formschema/:id', async ctx => {
             ctx.app.emit('error', error, ctx);
         });
     if(!formSchema) {
-        return ctx.throw(400, `FormSchema ${ctx.params.id} not found!`);
+        return ctx.throw(400, `formschema ${ctx.params.id} not found!`);
     }
     return ctx.body = formSchema;
 });
