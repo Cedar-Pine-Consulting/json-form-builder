@@ -2,6 +2,10 @@
 
 Builing forms with jsonforms.io, ajv.js and postgres JSON fields.
 
+## Running
+
+Run `docker-compose up`
+
 
 ## TODO:
 
