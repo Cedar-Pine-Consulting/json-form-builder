@@ -40,16 +40,16 @@ function FormBuilderApp () {
             onClick={onSubmit}>
             Submit
           </button>
-          <table>
-            <tr>
-              <td>schema</td>
-              <td><div>{schemaState.schema}</div></td>
-            </tr>
-            <tr>
-              <td>ui-schema</td>
-              <td><div>{schemaState.uischema}</div></td>
-            </tr>
-          </table>
+          {/* <table> */}
+          {/*   <tr> */}
+          {/*     <td>schema</td> */}
+          {/*     <td><div>{schemaState.schema}</div></td> */}
+          {/*   </tr> */}
+          {/*   <tr> */}
+          {/*     <td>ui-schema</td> */}
+          {/*     <td><div>{schemaState.uischema}</div></td> */}
+          {/*   </tr> */}
+          {/* </table> */}
       </>
   );
 }

@@ -23,6 +23,7 @@ function App() {
       </header> */}
       <Toaster/>
       <FormBuilderApp />
+      <hr />
       <Form />
     </div>
   );
