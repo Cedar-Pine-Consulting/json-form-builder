@@ -31,4 +31,22 @@ router.get('/api/formschema/:id', async ctx => {
     return ctx.body = formSchema;
 });
 
+router.post('/api/formschema/', async ctx => {
+    console.log(ctx.request.body);
+    const formSchema = await knex('formschema')
+        .insert(ctx.request.body)
+        .returning("*")
+        .then((formSchema) => {
+            return formSchema;
+        })
+        .catch((err) => {
+            console.log(`api/formschema post unexpected error ${err}`);
+        });
+    if(!formSchema) {
+        return ctx.throw(500, 'Could Not Create FormSchema');
+    };
+    return ctx.body = formSchema;
+});
+
+
 module.exports = router;
