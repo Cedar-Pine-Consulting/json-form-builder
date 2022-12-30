@@ -6,10 +6,12 @@ Builing forms with jsonforms.io, ajv.js and postgres JSON fields.
 ## TODO:
 
 ### App:
-- install jsonforms.io seed app
-- build form tables
-- build form rest views
-- use AJV for server side form validation
+- build FormSchema create endpoint
+- figure UI URLs
+- create FormSubmission table
+  - use AJV for server side form validation
+- create FormSubmission create / view endpoints
+
 
 ### Housekeeping
 - actions all `TODO`s in code
