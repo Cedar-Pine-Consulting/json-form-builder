@@ -6,15 +6,35 @@ import {FormBuilder} from '@ginkgo-bioworks/react-json-schema-form-builder';
 function FormBuilderApp () {
   const [schemaState, setSchemaState] = useState("");
 
+  const generateUISchema = (jsonSchema) => {
+    const elements = Object.keys(jsonSchema.properties)
+                             // for every property in the json schema
+                             .map((property) => {
+                               // return a jsonforms.io compatible ui-schema object
+                               return {
+                                 "type": "Control",
+                                 "scope": `#/properties/${property}`
+                               }
+                             })
+    return {
+      "type": "VerticalLayout",
+      "elements": elements
+    }
+  }
+
   const onSubmit = (e) => {
     e.preventDefault();
     if (!schemaState) {
       toast.error("can not submit empty formschema");
     }
+    const schemaData = JSON.parse(schemaState.schema);
+    // console.log("converted json-schema data",  schemaData);
+    const uiSchemaData = generateUISchema(schemaData);
+    console.log("converted ui-schema data",  uiSchemaData);
     const data = {
-      "name":  JSON.parse(schemaState.schema).title,
-      "schema": JSON.parse(schemaState.schema),
-      "uischema": JSON.parse(schemaState.uischema)
+      "name":  schemaData.title,
+      "schema": schemaData,
+      "uischema": uiSchemaData
     };
     console.log(data);
     axios.post('/api/formschema/', data)

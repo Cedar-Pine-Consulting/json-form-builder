@@ -49,6 +49,7 @@ function Form() {
           cells={materialCells}
           onChange={({ data, errors }) => setData(data)}
         />
+        {/* <div>{JSON.stringify(formSchema)}</div> */}
       </div>
     );
   }
