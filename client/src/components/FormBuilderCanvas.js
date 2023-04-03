@@ -42,6 +42,10 @@ function FormBuilderCanvas({ jsonSchema, uiSchema, onJsonSchemaChange, onUiSchem
     console.log("oldOrder", oldOrder);
     newUiSchema["ui:order"] = oldOrder.filter((v) => v !== id);
     onUiSchemaChange(newUiSchema);
+    // this shouldn't happen with current app flow, but in case that changes
+    if (currentlyEditingID === id) {
+      setCurrentlyEditingID(null);
+    }
   }
 
   function onStartEdit(id) {

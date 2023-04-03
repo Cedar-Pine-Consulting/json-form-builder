@@ -4,13 +4,13 @@ import Ajv from "ajv";
 const ajv = new Ajv();
 
 function EditFormComponent({ formComponent, onSave, onCancel }) {
-  const [name, setName] = useState(formComponent.id);
+  const [ID, setID] = useState(formComponent.id);
   const [jsonSchemaString, setJsonSchemaString] = useState(JSON.stringify(formComponent.jsonSchema));
   const [uiSchemaString, setUiSchemaString] = useState(JSON.stringify(formComponent.uiSchema));
   const [errors, setErrors] = useState({});
 
-  function handleNameChange(event) {
-    setName(event.target.value);
+  function handleIDChange(event) {
+    setID(event.target.value);
   }
 
   function handleJsonSchemaChange(event) {
@@ -53,7 +53,7 @@ function EditFormComponent({ formComponent, onSave, onCancel }) {
     // Update the form component with the new properties
     const newFormComponent = {
       ...formComponent,
-      id: name,
+      id: ID,
       jsonSchema,
       uiSchema,
     };
@@ -63,8 +63,8 @@ function EditFormComponent({ formComponent, onSave, onCancel }) {
   return (
     <div>
       <label>
-        Name:
-        <input type="text" value={name} onChange={handleNameChange} />
+        ID:
+        <input type="text" value={ID} onChange={handleIDChange} />
       </label>
       <label>
         JSON Schema:

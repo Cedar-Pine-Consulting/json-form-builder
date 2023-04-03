@@ -15,50 +15,50 @@ export function generateFormComponentData(jsonSchema, uiSchema) {
 
 export const toolBoxFormComponents = [
   {
-    id: "firstName",
+    id: "string",
     jsonSchema: {
       type: "string",
-      title: "First Name",
-      default: "John",
+      title: "Example String",
+      default: "A string",
     },
     uiSchema: {
-      "ui:autofocus": true,
       "ui:emptyValue": "",
       "ui:placeholder": "ui:emptyValue causes this field to always be valid despite being required",
-      "ui:autocomplete": "family-name",
     },
   },
   {
-    id: "lastName",
-    jsonSchema: {
-      type: "string",
-      title: "Last Name",
-      default: "Doe",
-    },
-    uiSchema: {
-      "ui:autocomplete": "given-name",
-    },
-  },
-  {
-    id: "age",
+    id: "int",
     jsonSchema: {
       "type": "integer",
-      "title": "Age",
+      "title": "example int",
     },
     uiSchema: {
       "ui:widget": "updown",
     },
   },
   {
-    id: "bio",
+    id: "textarea",
     jsonSchema: {
       "type": "string",
-      "title": "Bio",
+      "title": "example text area",
     },
     uiSchema: {
       "ui:widget": "textarea",
     },
   },
+  {
+    id: "bool",
+    jsonSchema: {
+      "type": "boolean",
+      "oneOf": [
+        { "const": true, "title": "Custom label for true" },
+        { "const": false, "title": "Custom label for false" }
+      ]
+    },
+    uiSchema: {
+      "ui:widget": "radio"
+    },
+  }
 ];
 
 export const emptyFormSchema = {
