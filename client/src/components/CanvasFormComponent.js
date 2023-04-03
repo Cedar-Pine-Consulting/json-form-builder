@@ -3,7 +3,7 @@ import React from "react";
 import { Button, Box } from "@mui/material";
 // import { validate } from "ajv";
 
-function CanvasFormComponent({ id, jsonSchema, uiSchema, onJsonSchemaChange, onUiSchemaChange, onDelete }) {
+function CanvasFormComponent({ id, jsonSchema, uiSchema, onClickDelete, onClickEdit }) {
   // const [showModal, setShowModal] = useState(false);
   // const [name, setName] = useState(id);
   // const [newJsonSchema, setNewJsonSchema] = useState(JSON.stringify(jsonSchema, null, 2));
@@ -53,16 +53,12 @@ function CanvasFormComponent({ id, jsonSchema, uiSchema, onJsonSchemaChange, onU
   // };
   // const handleShow = () => setShowModal(true);
 
-  function handleDelete() {
-    onDelete(id);
-  }
-
 
   return (
     <Box sx={{ p: 2, border: '1px dashed grey' }}>
       <div className="d-flex flex-column p-2">
         <div className="d-flex justify-content-between">
-          <Button onClick={handleDelete}>x</Button>
+          <Button onClick={onClickDelete}>x</Button>
           {/* TODO: edit button open edit mode */}
           <Button>✏️</Button>
           <div><strong>{id}</strong></div>

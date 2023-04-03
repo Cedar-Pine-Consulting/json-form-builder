@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 
 // TODO: props validation
@@ -16,8 +16,8 @@ function ToolBoxComponent({ formComponents, onDragEnd }) {
           <div {...provided.droppableProps} ref={provided.innerRef}>
             {formComponents.map((formComponent, index) => (
               <Draggable
-                key={formComponent.id}
-                draggableId={formComponent.id}
+                key={`toolbox-${formComponent.id}`}
+                draggableId={`toolbox-${formComponent.id}`}
                 index={index}>
                 {(provided, snapshot) => (
                   <div

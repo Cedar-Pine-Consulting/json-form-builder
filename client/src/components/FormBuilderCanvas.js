@@ -1,6 +1,5 @@
-import { useState } from "react";
-import { Droppable, Draggable, Stack } from "react-beautiful-dnd";
-import ToolBoxComponent from "./ToolBoxComponent";
+import React from "react";
+import { Droppable, Draggable } from "react-beautiful-dnd";
 import CanvasFormComponent from "./CanvasFormComponent";
 import { generateFormComponentData } from "./utils";
 // import CanvasEditFormComponentModal from "./CanvasEditFormComponentModal";
@@ -43,6 +42,10 @@ function FormBuilderCanvas({ jsonSchema, uiSchema, onJsonSchemaChange, onUiSchem
     onUiSchemaChange(newUiSchema);
   }
 
+  function onStartEdit(id) {
+    console.log("onEdit")
+  }
+
   return (
     <div>
       <h2>Form Builder Canvas</h2>
@@ -57,8 +60,8 @@ function FormBuilderCanvas({ jsonSchema, uiSchema, onJsonSchemaChange, onUiSchem
           >
             {formComponents.map((formComponent, index) => (
               <Draggable
-                key={formComponent.id}
-                draggableId={formComponent.id}
+                key={`canvas-${formComponent.id}`}
+                draggableId={`canvas-${formComponent.id}`}
                 index={index}
               >
                 {(provided) => (
@@ -69,9 +72,8 @@ function FormBuilderCanvas({ jsonSchema, uiSchema, onJsonSchemaChange, onUiSchem
                   >
                     <CanvasFormComponent
                       id={formComponent.id}
-                      jsonSchema={formComponent.jsonSchema}
-                      uiSchema={formComponent.uiSchema}
-                      onDelete={onDeleteID}
+                      onClickDelete={() => onDeleteID(formComponent.id)}
+                      onClickEdit={() => onStartEdit(formComponent.id)}
                     />
                   </div>
                 )}
