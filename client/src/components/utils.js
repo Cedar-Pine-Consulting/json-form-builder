@@ -37,7 +37,7 @@ export function generateSchemasFromComponent(component) {
 
 export const toolBoxFormComponents = [
   {
-    id: "string",
+    id: "string-input",
     jsonSchema: {
       type: "string",
       title: "Example String",
@@ -49,7 +49,7 @@ export const toolBoxFormComponents = [
     },
   },
   {
-    id: "int",
+    id: "int-input",
     jsonSchema: {
       "type": "integer",
       "title": "example int",
@@ -59,7 +59,7 @@ export const toolBoxFormComponents = [
     },
   },
   {
-    id: "textarea",
+    id: "textarea-input",
     jsonSchema: {
       "type": "string",
       "title": "example text area",
@@ -69,7 +69,7 @@ export const toolBoxFormComponents = [
     },
   },
   {
-    id: "bool",
+    id: "bool-input",
     jsonSchema: {
       "type": "boolean",
       "oneOf": [

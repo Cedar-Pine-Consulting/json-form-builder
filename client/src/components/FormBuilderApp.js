@@ -39,14 +39,13 @@ function FormBuilderApp() {
   };
 
   function handleDragEnd(result) {
-    console.log("FormbuilderCanvas handleDragend");
+    // TODO: refactor this giant fn
     if (!result.destination) {
       // The item was dropped outside the drop zone
       console.log("component dragged to no destination");
       return;
     }
     const { source, destination } = result;
-    console.log("drop source, dest", source, destination);
 
     // creates an array of components that represent each property in the formSchema/uiSchema
     const canvasFormComponents = generateFormComponentData(
@@ -58,8 +57,15 @@ function FormBuilderApp() {
     const newCanvasFormComponents = Array.from(canvasFormComponents);
     const draggedCanvasFormComponentData =
       source.droppableId === "toolbox"
-        ? toolBoxFormComponents[source.index] // new component if from toolbox
+          ? { ...toolBoxFormComponents[source.index] } // new component if from toolbox
         : newCanvasFormComponents.splice(source.index, 1)[0]; // pop existing component if from canvas
+
+    // if ID already exists in form, add _ to id
+    // TODO: think of better solution
+    if (newCanvasFormComponents.map((formComponent) => formComponent.id).includes(draggedCanvasFormComponentData.id)) {
+      console.log("found dyupe");
+      draggedCanvasFormComponentData.id = draggedCanvasFormComponentData.id + "_";
+    }
     // put component in order
     newCanvasFormComponents.splice(
       destination.index,
@@ -67,7 +73,6 @@ function FormBuilderApp() {
       draggedCanvasFormComponentData
     );
     // Update the uiSchema ordering based on the new form component order
-    console.log("newCanvasFormComponents", newCanvasFormComponents);
     const newUiSchemaProps = newCanvasFormComponents.reduce((acc, formComponent) => {
       const transformedProp = { [formComponent.id]: formComponent.uiSchema };
       return {
@@ -85,7 +90,6 @@ function FormBuilderApp() {
       ...newUiSchemaProps,
       "ui:order": newUiSchemaOrdering,
     };
-
     const newJsonSchemaProperties = newCanvasFormComponents.reduce((acc, formComponent) => {
       const transformedProp = { [formComponent.id]: formComponent.jsonSchema };
       console.log("transformedProp", transformedProp);

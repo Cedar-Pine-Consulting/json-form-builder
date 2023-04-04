@@ -11,15 +11,14 @@ function FormBuilderCanvas({ jsonSchema, uiSchema, onJsonSchemaChange, onUiSchem
   const formComponents = generateFormComponentData(jsonSchema, uiSchema);
 
   function onChangeFormTitle(e) {
-    // console.log("FormBuilderCanvas onchangetitle", e);
     const newSchema = {
       ...jsonSchema,
       title: e.target.value,
     };
     onJsonSchemaChange(newSchema);
   }
+
   function onChangeFormDescription(e) {
-    // console.log("FormBuilderCanvas onChangeDescription");
     const newSchema = {
       ...jsonSchema,
       description: e.target.value,
@@ -39,7 +38,6 @@ function FormBuilderCanvas({ jsonSchema, uiSchema, onJsonSchemaChange, onUiSchem
     const { [id]: removedUiProp, ...newUiSchema } = uiSchema;
     // remove from ordering
     const oldOrder = newUiSchema["ui:order"];
-    console.log("oldOrder", oldOrder);
     newUiSchema["ui:order"] = oldOrder.filter((v) => v !== id);
     onUiSchemaChange(newUiSchema);
     // this shouldn't happen with current app flow, but in case that changes
@@ -49,12 +47,10 @@ function FormBuilderCanvas({ jsonSchema, uiSchema, onJsonSchemaChange, onUiSchem
   }
 
   function onStartEdit(id) {
-    console.log("onEdit")
     setCurrentlyEditingID(id);
   }
 
   function onEditSave(oldComponent, newComponent) {
-    console.log("oldComponent, newComponent", oldComponent, newComponent);
     const newJsonSchema = { ...jsonSchema };
     const newUiSchema = { ...uiSchema };
     // remove old ID if ID changed
@@ -81,6 +77,7 @@ function FormBuilderCanvas({ jsonSchema, uiSchema, onJsonSchemaChange, onUiSchem
   function onEditCancel(component) {
     setCurrentlyEditingID(null);
   }
+
   return (
     <div>
       <h2>Form Builder Canvas</h2>
