@@ -5,14 +5,9 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { DragDropContext } from "react-beautiful-dnd";
 import {
   Box,
-  Button,
   Container,
-  FormControl,
   Grid,
-  InputLabel,
-  MenuItem,
   Stack,
-  Select,
 } from "@mui/material";
 import FormBuilderCanvas from "./FormBuilderCanvas";
 import ToolBoxComponent from "./ToolBoxComponent";
@@ -29,14 +24,14 @@ function FormBuilderApp() {
   const [formSchema, setFormSchema] = useState(emptyFormSchema);
   const [uiSchema, setUiSchema] = useState(emptyUISchema);
   const [data, setData] = useState({});
-  const [selectedProgramId, setSelectedProgramId] = useState(1);
+  // const [selectedProgramId, setSelectedProgramId] = useState(1);
   // const [canvasFormComponents, setCanvasFormComponents] = useState([]);
   // const [componentIdCounter, setComponentIdCounter] = useState(0);
-  const onProgramIdChange = (e) => { setSelectedProgramId(e.target.value) };
-  const onCreateSubmit = (e) => {
-    console.log("form create submitted");
-    e.preventDefault();
-  };
+  // const onProgramIdChange = (e) => { setSelectedProgramId(e.target.value) };
+  // const onCreateSubmit = (e) => {
+  //   console.log("form create submitted");
+  //   e.preventDefault();
+  // };
 
   function handleDragEnd(result) {
     // TODO: refactor this giant fn
@@ -152,25 +147,25 @@ function FormBuilderApp() {
                 onChange={handleOnFormDataChange}
               />
             </Box>
-            <form onSubmit={onCreateSubmit}>
-              <FormControl>
-                <InputLabel id="select-program-label">Program ID</InputLabel>
-                <Select
-                  labelId="select-program-label"
-                  id="select-program"
-                  value={selectedProgramId}
-                  onChange={onProgramIdChange}
-                >
-                  <MenuItem value={1}>1</MenuItem>
-                  <MenuItem value={2}>2</MenuItem>
-                  <MenuItem value={3}>3</MenuItem>
-                </Select>
-                <Button variant="contained" type="submit">create form template</Button>
-              </FormControl>
-            </form>
+            {/* <form onSubmit={onCreateSubmit}> */}
+            {/*   <FormControl> */}
+            {/*     <InputLabel id="select-program-label">Program ID</InputLabel> */}
+            {/*     <Select */}
+            {/*       labelId="select-program-label" */}
+            {/*       id="select-program" */}
+            {/*       value={selectedProgramId} */}
+            {/*       onChange={onProgramIdChange} */}
+            {/*     > */}
+            {/*       <MenuItem value={1}>1</MenuItem> */}
+            {/*       <MenuItem value={2}>2</MenuItem> */}
+            {/*       <MenuItem value={3}>3</MenuItem> */}
+            {/*     </Select> */}
+            {/*     <Button variant="contained" type="submit">create form template</Button> */}
+            {/*   </FormControl> */}
+            {/* </form> */}
             <Box>
               <h3>App State</h3>
-              <div>Selected Program: {selectedProgramId}</div>
+              {/* <div>Selected Program: {selectedProgramId}</div> */}
               <div>Form Schema</div>
               <code>{JSON.stringify(formSchema)}</code>
               <div>UI Schema</div>
