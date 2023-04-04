@@ -10,6 +10,7 @@ function EditFormComponent({ formComponent, onSave, onCancel }) {
   const [errors, setErrors] = useState({});
 
   function handleIDChange(event) {
+    // TODO: prevent overwriting existing ID
     setID(event.target.value);
   }
 
