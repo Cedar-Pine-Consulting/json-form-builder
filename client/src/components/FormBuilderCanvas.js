@@ -8,7 +8,8 @@ import CanvasEditFormComponent from "./CanvasEditFormComponent";
 function FormBuilderCanvas({ jsonSchema, uiSchema, onJsonSchemaChange, onUiSchemaChange }) {
   // TODO: edited ID state
   const [currentlyEditingID, setCurrentlyEditingID] = useState(null);
-  const formComponents = generateFormComponentData(jsonSchema, uiSchema);
+  // spread components to avoid stale refs
+  const formComponents = generateFormComponentData({ ...jsonSchema }, { ...uiSchema });
 
   function onChangeFormTitle(e) {
     const newSchema = {
@@ -51,8 +52,9 @@ function FormBuilderCanvas({ jsonSchema, uiSchema, onJsonSchemaChange, onUiSchem
   }
 
   function onEditSave(oldComponent, newComponent) {
-    const newJsonSchema = { ...jsonSchema };
-    const newUiSchema = { ...uiSchema };
+    // cloning current state forces re render on components
+    const newJsonSchema = structuredClone(jsonSchema);
+    const newUiSchema = structuredClone(uiSchema);
     // remove old ID if ID changed
     if (oldComponent.id !== newComponent.id) {
       delete newJsonSchema.properties[oldComponent.id];
@@ -69,9 +71,10 @@ function FormBuilderCanvas({ jsonSchema, uiSchema, onJsonSchemaChange, onUiSchem
     // update id in props
     newJsonSchema.properties[newComponent.id] = newComponent.jsonSchema;
     newUiSchema[newComponent.id] = newComponent.uiSchema;
+    console.log("onEditSave: json, ui", newJsonSchema, newUiSchema);
+    setCurrentlyEditingID(null);
     onJsonSchemaChange(newJsonSchema);
     onUiSchemaChange(newUiSchema);
-    setCurrentlyEditingID(null);
   }
 
   function onEditCancel(component) {

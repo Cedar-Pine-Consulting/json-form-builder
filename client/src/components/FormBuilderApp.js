@@ -109,6 +109,18 @@ function FormBuilderApp() {
     setFormSchema(newJsonSchema);
   }
 
+  function handleFormSchemaChange(jsonSchema) {
+    console.log("handleFormSchemaChange", jsonSchema);
+    const newData = { ...jsonSchema };
+    setFormSchema(newData);
+  }
+
+  function handleUiSchemaChange(uiSchema) {
+    console.log("handleUiSchemaChange", uiSchema);
+    const newData = { ...uiSchema };
+    setUiSchema(newData);
+  }
+
   function handleOnFormDataChange(event) {
     console.log('handleOnFormChange', event);
     setData(event.formData);
@@ -130,8 +142,8 @@ function FormBuilderApp() {
                 <FormBuilderCanvas
                   jsonSchema={formSchema}
                   uiSchema={uiSchema}
-                  onJsonSchemaChange={setFormSchema}
-                  onUiSchemaChange={setUiSchema}
+                  onJsonSchemaChange={handleFormSchemaChange}
+                  onUiSchemaChange={handleUiSchemaChange}
                 />
               </Box>
             </Grid>
