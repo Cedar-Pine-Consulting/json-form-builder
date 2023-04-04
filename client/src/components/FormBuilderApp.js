@@ -24,6 +24,7 @@ function FormBuilderApp() {
   const [formSchema, setFormSchema] = useState(emptyFormSchema);
   const [uiSchema, setUiSchema] = useState(emptyUISchema);
   const [data, setData] = useState({});
+
   // const [selectedProgramId, setSelectedProgramId] = useState(1);
   // const [canvasFormComponents, setCanvasFormComponents] = useState([]);
   // const [componentIdCounter, setComponentIdCounter] = useState(0);
@@ -57,8 +58,8 @@ function FormBuilderApp() {
 
     // if ID already exists in form, add _ to id
     // TODO: think of better solution
-    if (newCanvasFormComponents.map((formComponent) => formComponent.id).includes(draggedCanvasFormComponentData.id)) {
-      console.log("found dyupe");
+    while (newCanvasFormComponents.map((formComponent) => formComponent.id).includes(draggedCanvasFormComponentData.id)) {
+      console.log("found dupe");
       draggedCanvasFormComponentData.id = draggedCanvasFormComponentData.id + "_";
     }
     // put component in order
