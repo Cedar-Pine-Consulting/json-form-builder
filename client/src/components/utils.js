@@ -12,13 +12,13 @@ export const emptyUISchema = {
 
 export function generateFormComponentData(jsonSchema, uiSchema) {
   const formData = [];
-  // Iterate through each property in the JSON schema
-  for (const propName in jsonSchema.properties) {
-    // Create a new form component data object
+  // use ui ordering if it exists, default to jsonSchem.properties keys
+  const componentOrder = uiSchema["ui:order"].length ? uiSchema["ui:order"] : Object.keys(jsonSchema.properties);
+  for (const id of componentOrder) {
     const formComponentData = {
-      id: propName,
-      jsonSchema: jsonSchema.properties[propName],
-      uiSchema: uiSchema[propName] || {},
+      id: id,
+      jsonSchema: jsonSchema.properties[id],
+      uiSchema: uiSchema[id] || {},
     };
     formData.push(formComponentData);
   }
