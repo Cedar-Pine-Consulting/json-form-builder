@@ -5,7 +5,7 @@ import { generateFormComponentData } from "./utils";
 import CanvasEditFormComponent from "./CanvasEditFormComponent";
 //
 
-function FormBuilderCanvas({ jsonSchema, uiSchema, onJsonSchemaChange, onUiSchemaChange, formData,  onFormDataChange }) {
+function FormBuilderCanvas({ jsonSchema, uiSchema, onJsonSchemaChange, onUiSchemaChange, formData, onFormDataChange }) {
   // TODO: edited ID state
   const [currentlyEditingID, setCurrentlyEditingID] = useState(null);
   // spread components to avoid stale refs
@@ -75,10 +75,12 @@ function FormBuilderCanvas({ jsonSchema, uiSchema, onJsonSchemaChange, onUiSchem
         return v;
       });
       // update form data
-      const { [oldComponent.id]: oldStateProp, ...rest } = formData;
-      const newData = { ...rest, [newComponent.id]: oldStateProp };
-      // only update form data if ID changed
-      onFormDataChange(newData);
+      if (oldComponent.id in formData) {
+        const { [oldComponent.id]: oldStateProp, ...rest } = formData;
+        const newData = { ...rest, [newComponent.id]: oldStateProp };
+        // only update form data if ID changed
+        onFormDataChange(newData);
+      }
     }
     // update id in props
     newJsonSchema.properties[newComponent.id] = newComponent.jsonSchema;
