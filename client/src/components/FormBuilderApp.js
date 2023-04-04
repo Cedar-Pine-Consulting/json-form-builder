@@ -113,9 +113,9 @@ function FormBuilderApp() {
     setUiSchema(newData);
   }
 
-  function handleOnFormDataChange(data) {
-    console.log('handleOnFormChange', data);
-    setData(data.formData);
+  function handleOnFormDataChange(formData) {
+    console.log('handleOnFormDataChange', formData);
+    setData(formData);
   }
 
   return (
@@ -151,7 +151,7 @@ function FormBuilderApp() {
                 uiSchema={uiSchema}
                 formData={data}
                 validator={validator}
-                onChange={handleOnFormDataChange}
+                onChange={(data) => handleOnFormDataChange(data.formData)}
               />
             </Box>
             <Box>

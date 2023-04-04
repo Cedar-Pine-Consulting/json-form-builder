@@ -45,8 +45,7 @@ function FormBuilderCanvas({ jsonSchema, uiSchema, onJsonSchemaChange, onUiSchem
 
     // remove refs in formdata
     const { [id]: removedDataProp, ...newFormData } = formData;
-    onFormDataChange(formData);
-
+    onFormDataChange(newFormData);
 
     // this shouldn't happen with current app flow, but in case that changes
     if (currentlyEditingID === id) {
@@ -89,6 +88,7 @@ function FormBuilderCanvas({ jsonSchema, uiSchema, onJsonSchemaChange, onUiSchem
     setCurrentlyEditingID(null);
     onJsonSchemaChange(newJsonSchema);
     onUiSchemaChange(newUiSchema);
+
   }
 
   function onEditCancel(component) {
