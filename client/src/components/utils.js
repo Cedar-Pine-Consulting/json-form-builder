@@ -1,3 +1,15 @@
+export const emptyFormSchema = {
+  title: "test",
+  type: "object",
+  description: "test",
+  required: [],
+  properties: {},
+};
+
+export const emptyUISchema = {
+  "ui:order": [],
+};
+
 export function generateFormComponentData(jsonSchema, uiSchema) {
   const formData = [];
   // Iterate through each property in the JSON schema
@@ -11,6 +23,16 @@ export function generateFormComponentData(jsonSchema, uiSchema) {
     formData.push(formComponentData);
   }
   return formData;
+}
+
+export function generateSchemasFromComponent(component) {
+  const jsonSchema = {};
+  jsonSchema.properties = { ...jsonSchema.properties, [component.id] : component.jsonSchema }
+  const uiSchema = { ...component.uiSchema, "ui:ordering": [component.id] }
+  return {
+    uiSchema: uiSchema,
+    jsonSchema: jsonSchema
+  }
 }
 
 export const toolBoxFormComponents = [
@@ -61,14 +83,3 @@ export const toolBoxFormComponents = [
   }
 ];
 
-export const emptyFormSchema = {
-  title: "test",
-  type: "object",
-  description: "test",
-  required: [],
-  properties: {},
-};
-
-export const emptyUISchema = {
-  "ui:order": [],
-};
