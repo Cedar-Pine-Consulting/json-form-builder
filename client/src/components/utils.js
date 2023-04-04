@@ -27,7 +27,7 @@ export function generateFormComponentData(jsonSchema, uiSchema) {
 
 export function generateSchemasFromComponent(component) {
   const jsonSchema = {};
-  jsonSchema.properties = { ...jsonSchema.properties, [component.id] : component.jsonSchema }
+  jsonSchema.properties = { ...jsonSchema.properties, [component.id]: component.jsonSchema }
   const uiSchema = { ...component.uiSchema, "ui:ordering": [component.id] }
   return {
     uiSchema: uiSchema,
@@ -80,6 +80,30 @@ export const toolBoxFormComponents = [
     uiSchema: {
       "ui:widget": "radio"
     },
+  },
+  {
+    id: "address",
+    jsonSchema: {
+      title: 'Address',
+      type: 'object',
+      required: ['street1', 'city', 'state', 'zipCode'],
+      properties: {
+        street1: {
+          type: 'string',
+        },
+        street2: {
+          type: 'string',
+        },
+        city: {
+          type: 'string',
+        },
+        state: {
+          type: 'string',
+        },
+        zipCode: {
+          type: 'number',
+        },
+      },
+    },
   }
 ];
-
