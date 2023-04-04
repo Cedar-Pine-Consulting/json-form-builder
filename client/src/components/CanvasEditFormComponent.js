@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import Ajv from "ajv";
+import JSONInput from 'react-json-editor-ajrm';
+import locale from 'react-json-editor-ajrm/locale/en';
+
 
 const ajv = new Ajv();
 
 function EditFormComponent({ formComponent, onSave, onCancel }) {
   const [ID, setID] = useState(formComponent.id);
-  const [jsonSchemaString, setJsonSchemaString] = useState(JSON.stringify(formComponent.jsonSchema));
-  const [uiSchemaString, setUiSchemaString] = useState(JSON.stringify(formComponent.uiSchema));
+  const [jsonSchema, setJsonSchema] = useState(formComponent.jsonSchema);
+  const [uiSchema, setUiSchema] = useState(formComponent.uiSchema);
   const [errors, setErrors] = useState({});
 
   function handleIDChange(event) {
@@ -15,9 +18,7 @@ function EditFormComponent({ formComponent, onSave, onCancel }) {
   }
 
   function handleJsonSchemaChange(event) {
-    const newJsonSchemaString = event.target.value;
-    setJsonSchemaString(newJsonSchemaString);
-
+    const newJsonSchema = event.jsObject;
     // Validate the JSON schema
     // const valid = ajv.validateSchema(newJsonSchema);
     // if (!valid) {
@@ -25,12 +26,11 @@ function EditFormComponent({ formComponent, onSave, onCancel }) {
     // } else {
     //   setErrors({});
     // }
+    setJsonSchema(newJsonSchema);
   }
 
   function handleUiSchemaChange(event) {
-    const newUiSchemaString = event.target.value;
-    setUiSchemaString(newUiSchemaString);
-
+    const newUiSchema = event.jsObject;
     // // Validate the UI schema
     // const valid = ajv.validateSchema(newUiSchema);
     // if (!valid) {
@@ -38,12 +38,11 @@ function EditFormComponent({ formComponent, onSave, onCancel }) {
     // } else {
     //   setErrors({});
     // }
+    setUiSchema(newUiSchema);
   }
 
   function handleSave() {
     // Validate the JSON schema and UI schema
-    const jsonSchema = JSON.parse(jsonSchemaString);
-    const uiSchema = JSON.parse(uiSchemaString);
     const validJsonSchema = ajv.validateSchema(jsonSchema);
     const validUiSchema = ajv.validateSchema(uiSchema);
     if (!validJsonSchema || !validUiSchema) {
@@ -69,11 +68,23 @@ function EditFormComponent({ formComponent, onSave, onCancel }) {
       </label>
       <label>
         JSON Schema:
-        <textarea value={jsonSchemaString} onChange={handleJsonSchemaChange} />
+        <JSONInput
+          id = "${ID}-jsonSchema"
+          placeholder = { jsonSchema }
+          locale      = { locale }
+          height = "auto"
+          onChange={handleJsonSchemaChange}
+        />
       </label>
       <label>
         UI Schema:
-        <textarea value={uiSchemaString} onChange={handleUiSchemaChange} />
+        <JSONInput
+          id="${ID}-uiSchema"
+          placeholder={ uiSchema }
+          locale={ locale }
+          height="auto"
+          onChange={handleUiSchemaChange}
+        />
       </label>
       {Object.keys(errors).length > 0 && (
         <div>

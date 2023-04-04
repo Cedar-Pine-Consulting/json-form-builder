@@ -5,7 +5,7 @@ import { generateFormComponentData } from "./utils";
 import CanvasEditFormComponent from "./CanvasEditFormComponent";
 //
 
-function FormBuilderCanvas({ jsonSchema, uiSchema, onJsonSchemaChange, onUiSchemaChange }) {
+function FormBuilderCanvas({ jsonSchema, uiSchema, onJsonSchemaChange, onUiSchemaChange, formData,  onFormDataChange }) {
   // TODO: edited ID state
   const [currentlyEditingID, setCurrentlyEditingID] = useState(null);
   // spread components to avoid stale refs
@@ -34,6 +34,7 @@ function FormBuilderCanvas({ jsonSchema, uiSchema, onJsonSchemaChange, onUiSchem
     const { [id]: removedJsonProp, ...newJsonSchemaProps } = newJsonSchema.properties;
     newJsonSchema.properties = newJsonSchemaProps;
     onJsonSchemaChange(newJsonSchema);
+
     // update uiSchema
     // remove prop
     const { [id]: removedUiProp, ...newUiSchema } = uiSchema;
@@ -41,6 +42,12 @@ function FormBuilderCanvas({ jsonSchema, uiSchema, onJsonSchemaChange, onUiSchem
     const oldOrder = newUiSchema["ui:order"];
     newUiSchema["ui:order"] = oldOrder.filter((v) => v !== id);
     onUiSchemaChange(newUiSchema);
+
+    // remove refs in formdata
+    const { [id]: removedDataProp, ...newFormData } = formData;
+    onFormDataChange(formData);
+
+
     // this shouldn't happen with current app flow, but in case that changes
     if (currentlyEditingID === id) {
       setCurrentlyEditingID(null);
@@ -67,6 +74,11 @@ function FormBuilderCanvas({ jsonSchema, uiSchema, onJsonSchemaChange, onUiSchem
         }
         return v;
       });
+      // update form data
+      const { [oldComponent.id]: oldStateProp, ...rest } = formData;
+      const newData = { ...rest, [newComponent.id]: oldStateProp };
+      // only update form data if ID changed
+      onFormDataChange(newData);
     }
     // update id in props
     newJsonSchema.properties[newComponent.id] = newComponent.jsonSchema;
@@ -85,12 +97,19 @@ function FormBuilderCanvas({ jsonSchema, uiSchema, onJsonSchemaChange, onUiSchem
     <div>
       <h2>Form Builder Canvas</h2>
       <div>
-        <label>Form Title</label>
-        <input type="text" onChange={onChangeFormTitle} value={jsonSchema.title}></input>
+        <input
+          type="text"
+          onChange={onChangeFormTitle}
+          placeholder="Form Title"
+          value={jsonSchema.title}></input>
       </div>
       <div>
-        <label>Form Description</label>
-        <input type="text" onChange={onChangeFormDescription} value={jsonSchema.description}></input>
+        <input
+          type="text"
+          onChange={onChangeFormDescription}
+          value={jsonSchema.description}
+          placeholder="Form Description"
+        ></input>
       </div>
       <Droppable droppableId="canvas">
         {(provided) => (

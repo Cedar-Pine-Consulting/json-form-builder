@@ -3,6 +3,7 @@ import Form from '@rjsf/mui';
 import validator from '@rjsf/validator-ajv8';
 import CssBaseline from '@mui/material/CssBaseline';
 import { DragDropContext } from "react-beautiful-dnd";
+
 import {
   Box,
   Container,
@@ -25,15 +26,6 @@ function FormBuilderApp() {
   const [uiSchema, setUiSchema] = useState(emptyUISchema);
   const [data, setData] = useState({});
 
-  // const [selectedProgramId, setSelectedProgramId] = useState(1);
-  // const [canvasFormComponents, setCanvasFormComponents] = useState([]);
-  // const [componentIdCounter, setComponentIdCounter] = useState(0);
-  // const onProgramIdChange = (e) => { setSelectedProgramId(e.target.value) };
-  // const onCreateSubmit = (e) => {
-  //   console.log("form create submitted");
-  //   e.preventDefault();
-  // };
-
   function handleDragEnd(result) {
     // TODO: refactor this giant fn
     if (!result.destination) {
@@ -53,7 +45,7 @@ function FormBuilderApp() {
     const newCanvasFormComponents = Array.from(canvasFormComponents);
     const draggedCanvasFormComponentData =
       source.droppableId === "toolbox"
-          ? { ...toolBoxFormComponents[source.index] } // new component if from toolbox
+        ? { ...toolBoxFormComponents[source.index] } // new component if from toolbox
         : newCanvasFormComponents.splice(source.index, 1)[0]; // pop existing component if from canvas
 
     // if ID already exists in form, add _ to id
@@ -121,9 +113,9 @@ function FormBuilderApp() {
     setUiSchema(newData);
   }
 
-  function handleOnFormDataChange(event) {
-    console.log('handleOnFormChange', event);
-    setData(event.formData);
+  function handleOnFormDataChange(data) {
+    console.log('handleOnFormChange', data);
+    // setData(data);
   }
 
   return (
@@ -144,6 +136,8 @@ function FormBuilderApp() {
                   uiSchema={uiSchema}
                   onJsonSchemaChange={handleFormSchemaChange}
                   onUiSchemaChange={handleUiSchemaChange}
+                  formData={data}
+                  onFormDataChange={handleOnFormDataChange}
                 />
               </Box>
             </Grid>
@@ -160,31 +154,20 @@ function FormBuilderApp() {
                 onChange={handleOnFormDataChange}
               />
             </Box>
-            {/* <form onSubmit={onCreateSubmit}> */}
-            {/*   <FormControl> */}
-            {/*     <InputLabel id="select-program-label">Program ID</InputLabel> */}
-            {/*     <Select */}
-            {/*       labelId="select-program-label" */}
-            {/*       id="select-program" */}
-            {/*       value={selectedProgramId} */}
-            {/*       onChange={onProgramIdChange} */}
-            {/*     > */}
-            {/*       <MenuItem value={1}>1</MenuItem> */}
-            {/*       <MenuItem value={2}>2</MenuItem> */}
-            {/*       <MenuItem value={3}>3</MenuItem> */}
-            {/*     </Select> */}
-            {/*     <Button variant="contained" type="submit">create form template</Button> */}
-            {/*   </FormControl> */}
-            {/* </form> */}
             <Box>
               <h3>App State</h3>
-              {/* <div>Selected Program: {selectedProgramId}</div> */}
               <div>Form Schema</div>
-              <code>{JSON.stringify(formSchema)}</code>
+              <pre>
+                <code>{JSON.stringify(formSchema, null, 2)}</code>
+              </pre>
               <div>UI Schema</div>
-              <code>{JSON.stringify(uiSchema)}</code>
+              <pre>
+                <code>{JSON.stringify(uiSchema, null, 2)}</code>
+              </pre>
               <div>Form Data</div>
-              <code>{JSON.stringify(data)}</code>
+              <pre>
+                <code>{JSON.stringify(data, null, 2)}</code>
+              </pre>
             </Box>
           </Stack>
         </Container>

@@ -23,10 +23,11 @@
     "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.0",
+    "react-json-editor-ajrm": "^2.5.14",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
-  "homepage" : "https://cedar-pine-consulting.github.io/json-form-builder/",
+  "homepage": "https://cedar-pine-consulting.github.io/json-form-builder/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

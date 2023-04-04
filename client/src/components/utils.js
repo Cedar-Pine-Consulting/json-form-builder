@@ -1,7 +1,7 @@
 export const emptyFormSchema = {
-  title: "test",
+  title: "",
   type: "object",
-  description: "test",
+  description: "",
   required: [],
   properties: {},
 };
