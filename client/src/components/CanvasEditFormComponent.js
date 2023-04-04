@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Box, Grid } from "@mui/material";
 import Ajv from "ajv";
 import JSONInput from 'react-json-editor-ajrm';
 import locale from 'react-json-editor-ajrm/locale/en';
@@ -62,38 +63,50 @@ function EditFormComponent({ formComponent, onSave, onCancel }) {
 
   return (
     <div>
-      <label>
-        ID:
-        <input type="text" value={ID} onChange={handleIDChange} />
-      </label>
-      <label>
-        JSON Schema:
-        <JSONInput
-          id = "${ID}-jsonSchema"
-          placeholder = { jsonSchema }
-          locale      = { locale }
-          height = "auto"
-          onChange={handleJsonSchemaChange}
-        />
-      </label>
-      <label>
-        UI Schema:
-        <JSONInput
-          id="${ID}-uiSchema"
-          placeholder={ uiSchema }
-          locale={ locale }
-          height="auto"
-          onChange={handleUiSchemaChange}
-        />
-      </label>
-      {Object.keys(errors).length > 0 && (
+      <Box sx={{ p: 2, border: '1px dashed grey' }}>
         <div>
-          <p>Errors:</p>
-          <pre>{errors}</pre>
+          <label>
+            ID:
+            <input type="text" value={ID} onChange={handleIDChange} />
+          </label>
         </div>
-      )}
-      <button onClick={handleSave}>Save</button>
-      <button onClick={onCancel}>Cancel</button>
+        <Grid container>
+          <Grid xs={6}>
+            <label>
+              JSON Schema:
+              <JSONInput
+                id="${ID}-jsonSchema"
+                placeholder={jsonSchema}
+                locale={locale}
+                height="auto"
+                theme="light_mitsuketa_tribute"
+                onChange={handleJsonSchemaChange}
+              />
+            </label>
+          </Grid>
+          <Grid xs={6}>
+            <label>
+              UI Schema:
+              <JSONInput
+                id="${ID}-uiSchema"
+                placeholder={uiSchema}
+                locale={locale}
+                height="auto"
+                theme="light_mitsuketa_tribute"
+                onChange={handleUiSchemaChange}
+              />
+            </label>
+          </Grid>
+        </Grid>
+        {Object.keys(errors).length > 0 && (
+          <div>
+            <p>Errors:</p>
+            <pre>{errors}</pre>
+          </div>
+        )}
+        <button onClick={handleSave}>Save</button>
+        <button onClick={onCancel}>Cancel</button>
+      </Box>
     </div>
   );
 }

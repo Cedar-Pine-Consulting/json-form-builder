@@ -115,7 +115,7 @@ function FormBuilderApp() {
 
   function handleOnFormDataChange(data) {
     console.log('handleOnFormChange', data);
-    // setData(data);
+    setData(data.formData);
   }
 
   return (
