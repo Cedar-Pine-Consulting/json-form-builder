@@ -84,8 +84,14 @@ function FormBuilderCanvas({ jsonSchema, uiSchema, onJsonSchemaChange, onUiSchem
   return (
     <div>
       <h2>Form Builder Canvas</h2>
-      <input type="text" onChange={onChangeFormTitle} value={jsonSchema.title}></input>
-      <input type="text" onChange={onChangeFormDescription} value={jsonSchema.description}></input>
+      <div>
+        <label>Form Title</label>
+        <input type="text" onChange={onChangeFormTitle} value={jsonSchema.title}></input>
+      </div>
+      <div>
+        <label>Form Description</label>
+        <input type="text" onChange={onChangeFormDescription} value={jsonSchema.description}></input>
+      </div>
       <Droppable droppableId="canvas">
         {(provided) => (
           <div
