@@ -1,29 +1,40 @@
 {
-  "name": "client",
-  "version": "0.1.0",
+  "name": "json-form-builder",
+  "version": "0.0.1",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "^5.11.9",
+    "@mui/lab": "^5.0.0-alpha.120",
+    "@mui/material": "^5.11.10",
+    "@mui/styled-engine": "^5.11.11",
+    "@mui/x-date-pickers": "^6.0.3",
+    "@rjsf/core": "^5.10.0",
+    "@rjsf/mui": "^5.10.0",
+    "@rjsf/utils": "^5.10.0",
+    "@rjsf/validator-ajv8": "^5.10.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
     "react": "^18.2.0",
+    "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.0",
+    "react-json-editor-ajrm": "^2.5.14",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4",
-    "@jsonforms/core": "^3.0.0",
-    "@jsonforms/material-renderers": "^3.0.0",
-    "@jsonforms/react": "^3.0.0",
-    "@jsonforms/examples": "^3.0.0",
-    "@ginkgo-bioworks/react-json-schema-form-builder": "^2.10.1"
+    "web-vitals": "^2.1.4"
   },
+  "homepage": "https://cedar-pine-consulting.github.io/json-form-builder/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "watch": "node scripts/watch.js",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -42,5 +53,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^5.0.0"
   }
 }

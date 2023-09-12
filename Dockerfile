@@ -1,36 +1,18 @@
 #####################################
 # BUILD FRONT-END
 #####################################
-FROM node:16.17-alpine as frontend
+FROM node:18-alpine as frontend
 
-WORKDIR /client
+
+WORKDIR /app
 
 # add `/app/node_modules/.bin` to $PATH
 ENV PATH /app/node_modules/.bin:$PATH
 
 # Install dependencies
-COPY client/package.json ./
-COPY client/package-lock.json ./
+COPY ./package.json ./
 RUN npm i
 
 # Build the react app
-COPY client ./
+COPY src ./
 CMD ["npm", "run", "build"]
-
-
-#####################################
-# BUILD BACKEND
-#####################################
-FROM node:16.17-alpine as backend
-
-# add `/app/node_modules/.bin` to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
-
-WORKDIR /app
-
-RUN npm install --global nodemon
-
-# Add source
-COPY ./server ./
-RUN npm install
-CMD ["npm", "run", "start"]
