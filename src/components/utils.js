@@ -17,6 +17,7 @@ export function generateFormComponentData(jsonSchema, uiSchema) {
   for (const id of componentOrder) {
     const formComponentData = {
       id: id,
+      required: jsonSchema.required.includes(id),
       jsonSchema: jsonSchema.properties[id],
       uiSchema: uiSchema[id] || {},
     };

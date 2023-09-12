@@ -32,7 +32,10 @@ function FormBuilderCanvas({ jsonSchema, uiSchema, onJsonSchemaChange, onUiSchem
     // update jsonchema
     const newJsonSchema = { ...jsonSchema };
     const { [id]: removedJsonProp, ...newJsonSchemaProps } = newJsonSchema.properties;
+    const { [id]: removedJsonReq, ...newJsonSchemaReq } = newJsonSchema.required;
     newJsonSchema.properties = newJsonSchemaProps;
+    // remove from required
+    newJsonSchema.required = newJsonSchema.required.filter(i => i !== id);
     onJsonSchemaChange(newJsonSchema);
 
     // update uiSchema
@@ -54,6 +57,7 @@ function FormBuilderCanvas({ jsonSchema, uiSchema, onJsonSchemaChange, onUiSchem
   }
 
   function onStartEdit(id) {
+
     setCurrentlyEditingID(id);
   }
 
@@ -62,7 +66,7 @@ function FormBuilderCanvas({ jsonSchema, uiSchema, onJsonSchemaChange, onUiSchem
     const newJsonSchema = structuredClone(jsonSchema);
     const newUiSchema = structuredClone(uiSchema);
 
-
+    // handle changing ID
     if (oldComponent.id !== newComponent.id) {
       // error if new id already exists on form
       if (newComponent.id in jsonSchema.properties) {
@@ -70,6 +74,7 @@ function FormBuilderCanvas({ jsonSchema, uiSchema, onJsonSchemaChange, onUiSchem
       }
       // remove old ID if ID changed
       delete newJsonSchema.properties[oldComponent.id];
+      newJsonSchema.required = newJsonSchema.required.filter(i => i !== oldComponent.id);
       delete newUiSchema[oldComponent.id];
       // change name in ordering
       const oldOrder = newUiSchema["ui:order"]
@@ -87,6 +92,18 @@ function FormBuilderCanvas({ jsonSchema, uiSchema, onJsonSchemaChange, onUiSchem
         onFormDataChange(newData);
       }
     }
+
+    // handle changing required
+    if (oldComponent.required !== newComponent.required) {
+      if (newComponent.required) {
+        // add id to required
+        newJsonSchema.required.push(newComponent.id);
+      } else {
+        // remove id from required
+        newJsonSchema.required = newJsonSchema.required.filter(i => i !== newComponent.id);
+      }
+    }
+
     // update id in props
     newJsonSchema.properties[newComponent.id] = newComponent.jsonSchema;
     newUiSchema[newComponent.id] = newComponent.uiSchema;

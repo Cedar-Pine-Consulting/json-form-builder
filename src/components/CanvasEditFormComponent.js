@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Box, Grid } from "@mui/material";
-import { DuplicateIdError } from "./utils";
+import { Box, Grid, Checkbox } from "@mui/material";
 import Ajv from "ajv";
 import JSONInput from 'react-json-editor-ajrm';
 import locale from 'react-json-editor-ajrm/locale/en';
@@ -10,12 +9,20 @@ const ajv = new Ajv();
 
 function EditFormComponent({ formComponent, onSave, onCancel }) {
   const [ID, setID] = useState(formComponent.id);
+  const [required, setRequired] = useState(formComponent.required);
   const [jsonSchema, setJsonSchema] = useState(formComponent.jsonSchema);
   const [uiSchema, setUiSchema] = useState(formComponent.uiSchema);
   const [errors, setErrors] = useState({});
 
+  function handleRequiredChange(event) {
+    console.log("required state", required);
+    console.log("handleRequiredChange: ", event.target.value);
+
+    setRequired(!required);
+  }
+
+
   function handleIDChange(event) {
-    // TODO: prevent overwriting existing ID
     setID(event.target.value);
   }
 
@@ -57,6 +64,7 @@ function EditFormComponent({ formComponent, onSave, onCancel }) {
     const newFormComponent = {
       ...formComponent,
       id: ID,
+      required: required,
       jsonSchema,
       uiSchema,
     };
@@ -75,6 +83,9 @@ function EditFormComponent({ formComponent, onSave, onCancel }) {
           <label>
             ID:
             <input type="text" value={ID} onChange={handleIDChange} />
+          </label>
+          <label>Required?
+            <Checkbox checked={required} onChange={handleRequiredChange} />
           </label>
         </div>
         <Grid container>
