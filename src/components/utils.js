@@ -107,3 +107,11 @@ export const toolBoxFormComponents = [
     },
   }
 ];
+
+
+export class DuplicateIdError extends Error {
+  constructor(message) {
+    super(message); // (1)
+    this.name = "DuplicateIdError"; // (2)
+  }
+}

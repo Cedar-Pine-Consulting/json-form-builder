@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Box, Grid } from "@mui/material";
+import { DuplicateIdError } from "./utils";
 import Ajv from "ajv";
 import JSONInput from 'react-json-editor-ajrm';
 import locale from 'react-json-editor-ajrm/locale/en';
@@ -42,6 +43,7 @@ function EditFormComponent({ formComponent, onSave, onCancel }) {
     setUiSchema(newUiSchema);
   }
 
+
   function handleSave() {
     // Validate the JSON schema and UI schema
     const validJsonSchema = ajv.validateSchema(jsonSchema);
@@ -58,7 +60,12 @@ function EditFormComponent({ formComponent, onSave, onCancel }) {
       jsonSchema,
       uiSchema,
     };
-    onSave(formComponent, newFormComponent);
+    try {
+      onSave(formComponent, newFormComponent);
+      // TODO: figure out a better UI for errors than window alerts
+    } catch (DuplicateIdError) {
+      window.alert(DuplicateIdError);
+    }
   }
 
   return (

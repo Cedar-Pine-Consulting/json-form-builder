@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import CanvasFormComponent from "./CanvasFormComponent";
-import { generateFormComponentData } from "./utils";
+import { generateFormComponentData, DuplicateIdError } from "./utils";
 import CanvasEditFormComponent from "./CanvasEditFormComponent";
 //
 
@@ -61,8 +61,14 @@ function FormBuilderCanvas({ jsonSchema, uiSchema, onJsonSchemaChange, onUiSchem
     // cloning current state forces re render on components
     const newJsonSchema = structuredClone(jsonSchema);
     const newUiSchema = structuredClone(uiSchema);
-    // remove old ID if ID changed
+
+
     if (oldComponent.id !== newComponent.id) {
+      // error if new id already exists on form
+      if (newComponent.id in jsonSchema.properties) {
+        throw new DuplicateIdError(`FormComponent ID ${newComponent.id} already exists on form, please choose a new unique ID`);
+      }
+      // remove old ID if ID changed
       delete newJsonSchema.properties[oldComponent.id];
       delete newUiSchema[oldComponent.id];
       // change name in ordering
