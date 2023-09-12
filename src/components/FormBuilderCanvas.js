@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import CanvasFormComponent from "./CanvasFormComponent";
 import { generateFormComponentData, DuplicateIdError } from "./utils";
-import CanvasEditFormComponent from "./CanvasEditFormComponent";
-//
+import JSONEditFormComponent from "./CanvasJSONEditFormComponent";
+import SafeEditFormComponent from "./CanvasSafeEditFormComponent";
+
 
 function FormBuilderCanvas({ jsonSchema, uiSchema, onJsonSchemaChange, onUiSchemaChange, formData, onFormDataChange }) {
   // TODO: edited ID state
   const [currentlyEditingID, setCurrentlyEditingID] = useState(null);
+  const [editMode, setEditMode] = useState("safe");
   // spread components to avoid stale refs
   const formComponents = generateFormComponentData({ ...jsonSchema }, { ...uiSchema });
 
@@ -56,8 +58,13 @@ function FormBuilderCanvas({ jsonSchema, uiSchema, onJsonSchemaChange, onUiSchem
     }
   }
 
-  function onStartEdit(id) {
+  function onStartSafeEdit(id) {
+    setEditMode("safe");
+    setCurrentlyEditingID(id);
+  }
 
+  function onStartJSONEdit(id) {
+    setEditMode("json");
     setCurrentlyEditingID(id);
   }
 
@@ -157,16 +164,25 @@ function FormBuilderCanvas({ jsonSchema, uiSchema, onJsonSchemaChange, onUiSchem
                   >
                     {/* TODO: swap between display and edit components */}
                     {(currentlyEditingID === formComponent.id) ?
-                      <CanvasEditFormComponent
-                        formComponent={formComponent}
-                        onSave={onEditSave}
-                        onCancel={onEditCancel}
-                      />
-                      :
+                     ((editMode === "safe") ?
+                        <SafeEditFormComponent
+                          formComponent={formComponent}
+                          onSave={onEditSave}
+                          onCancel={onEditCancel}
+                        />
+                        :
+                        <JSONEditFormComponent
+                          formComponent={formComponent}
+                          onSave={onEditSave}
+                          onCancel={onEditCancel}
+                        />
+                      )
+                    :
                       <CanvasFormComponent
                         formComponent={formComponent}
                         onClickDelete={() => onDeleteID(formComponent.id)}
-                        onClickEdit={() => onStartEdit(formComponent.id)}
+                        onClickSafeEdit={() => onStartSafeEdit(formComponent.id)}
+                        onClickJSONEdit={() => onStartJSONEdit(formComponent.id)}
                       />
                     }
                   </div>

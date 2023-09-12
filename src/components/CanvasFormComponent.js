@@ -4,14 +4,15 @@ import Form from '@rjsf/mui';
 import validator from '@rjsf/validator-ajv8';
 import { generateSchemasFromComponent } from "./utils";
 
-function CanvasFormComponent({ formComponent, onClickDelete, onClickEdit }) {
+function CanvasFormComponent({ formComponent, onClickDelete, onClickSafeEdit, onClickJSONEdit }) {
   const { jsonSchema, uiSchema } = generateSchemasFromComponent(formComponent);
 
   return (
     <Box sx={{ p: 2, border: '1px dashed grey' }}>
       <div className="d-flex flex-column p-2">
         <div className="d-flex justify-content-between">
-          <Button onClick={onClickEdit}>✏️</Button>
+          <Button onClick={onClickSafeEdit}>✏️</Button>
+          <Button onClick={onClickJSONEdit}>🪛</Button>
           <Button onClick={onClickDelete}>❌️</Button>
           <div><strong>{formComponent.id}</strong></div>
           <Form

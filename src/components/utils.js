@@ -191,6 +191,22 @@ export const toolBoxFormComponents = [
   }
 ];
 
+export const UIWidgetTypes = [
+  "text",
+  "textarea",
+  "email",
+  "date",
+  "time",
+  "radio",
+  "select",
+  "checkbox",
+  "color",
+  "password",
+  "updown",
+  "uri",
+  null
+]
+
 
 export class DuplicateIdError extends Error {
   constructor(message) {

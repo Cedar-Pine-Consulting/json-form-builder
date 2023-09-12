@@ -7,7 +7,7 @@ import locale from 'react-json-editor-ajrm/locale/en';
 
 const ajv = new Ajv();
 
-function EditFormComponent({ formComponent, onSave, onCancel }) {
+function JSONEditFormComponent({ formComponent, onSave, onCancel }) {
   const [ID, setID] = useState(formComponent.id);
   const [required, setRequired] = useState(formComponent.required);
   const [jsonSchema, setJsonSchema] = useState(formComponent.jsonSchema);
@@ -24,6 +24,14 @@ function EditFormComponent({ formComponent, onSave, onCancel }) {
 
   function handleIDChange(event) {
     setID(event.target.value);
+  }
+
+  function handleTitleChange(event) {
+
+  }
+
+  function handleWidgetChange(event) {
+
   }
 
   function handleJsonSchemaChange(event) {
@@ -129,4 +137,4 @@ function EditFormComponent({ formComponent, onSave, onCancel }) {
   );
 }
 
-export default EditFormComponent;
+export default JSONEditFormComponent;
