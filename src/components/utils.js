@@ -60,6 +60,16 @@ export const toolBoxFormComponents = [
     },
   },
   {
+    id: "number-input",
+    jsonSchema: {
+      "type": "number",
+      "title": "example number",
+    },
+    uiSchema: {
+      "ui:widget": "updown",
+    },
+  },
+  {
     id: "textarea-input",
     jsonSchema: {
       "type": "string",
@@ -81,6 +91,78 @@ export const toolBoxFormComponents = [
     uiSchema: {
       "ui:widget": "radio"
     },
+  },
+  {
+    id: "multiple-choice",
+    jsonSchema: {
+      "type": "array",
+      "title": "Options",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "title": "Option",
+        "enum": [
+          "option 1",
+          "option 2",
+          "option 3",
+          "option 4"
+        ]
+      }
+    },
+    uiSchema: {
+       "ui:widget": "CheckboxesWidget"
+    }
+  },
+  {
+    id: "list-of-objects",
+    jsonSchema: {
+      type: "array",
+      title: "Children",
+      items: {
+        type: "object",
+        title: "Child",
+        properties: {
+          nick: {
+            type: "string",
+            title: "Nickname",
+            required: true
+          },
+          gender: {
+            type: "string",
+            title: "Gender",
+            enum: [ "male", "female", "other" ]
+          },
+          age: {
+            type: "integer",
+            title: "Age"
+          }
+        }
+      }
+    },
+  },
+  {
+    id: "secret",
+    jsonSchema: {
+      "title": "Password",
+      "type": "string",
+      "minLength": 3
+    },
+    uiSchema: {
+      "ui:widget": "password"
+    }
+  },
+  {
+    id: "date",
+    jsonSchema: {
+      "type": "string",
+      "format": "date"
+    },
+  },
+  { id: "time",
+    jsonSchema: {
+      "type": "string",
+      "format": "time"
+    }
   },
   {
     id: "address",
