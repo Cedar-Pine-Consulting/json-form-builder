@@ -1,58 +1,13 @@
 version: '3.7'
 services:
-    db:
-        image: postgres:13.4
-        restart: always
-        user: postgres
-        environment:
-            POSTGRES_USER: postgres
-            POSTGRES_DB: test
-            POSTGRES_PASSWORD: ''
-            # TODO: change this before deploying
-            POSTGRES_HOST_AUTH_METHOD: 'trust'
-        ports:
-            - '5433:5432'
-
-    migration:
-        build:
-          context: .
-          target: backend
-        depends_on:
-          - db
-        command: npm run bootstrap-db
-        volumes:
-          - ./server/knex/migrations:/app/knex/migrations
-          - ./server/knex/seeds:/app/knex/seeds
-
     frontend:
         build:
           context: .
           target: frontend
-        volumes:
-            - build:/client/build
-            - ./client/src:/client/src
-            - ./client/public:/client/public
-            - ./client/scripts:/client/scripts
-        command: npm run watch
-
-    backend:
-        build:
-          context: .
-          target: backend
-        volumes:
-            - ./server/src:/app/src
-            - build:/app/client/build
-        links:
-            - 'db'
-        depends_on:
-            - db
-            - migration
-            - frontend
         ports:
-            - '3001:3001'
-        environment:
-          DB_HOST: db
+            - "3001:3001"
+        volumes:
+            - ./src:/app/src
+            - ./public:/app/public
+            - ./scripts:/app/scripts
         command: npm run start
-
-volumes:
-    build:
