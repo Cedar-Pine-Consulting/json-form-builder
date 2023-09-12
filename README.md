@@ -15,6 +15,7 @@ Run `npm run sart` or `docker-compose up`
 ## TODO:
 
 ### Housekeeping
+- replace react-json-editor-ajrm (deprecated lib)
 - actions all `TODO`s in code
 - add SASS + styles
 - add jest unit tests

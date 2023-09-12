@@ -1,4 +1,4 @@
 node_modules
 pgdata
 .env
-client/build
+build
