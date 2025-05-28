@@ -1,24 +1,107 @@
-# JSON Form Builder Component
+# PLNet Form Builder
 
-Builing forms with jsonforms.io, ajv.js and postgres JSON fields.
+A standalone React form builder component extracted from the PLNet-Link CRM application. This component provides a drag-and-drop interface for creating dynamic forms with JSON Schema support.
 
-## JSON Schema and jsonforms.io
+## Features
 
-The app architecture is centered around JSON Forms as defined in a JSON Schema. There are several form libraries that use JSON Schema to define forms, one of the best one's is [jsonforms.io](https://jsonforms.io/). The library is well mantained and has extensive documentation and deep extensibility.
+- 🎯 Drag and drop form builder interface
+- 📝 JSON Schema based form generation
+- 🎨 Material-UI components
+- 🔧 Customizable field types
+- 📱 Responsive design
+- 🎭 React JSON Schema Form (RJSF) integration
 
-In essence, the FormBuilder component is just constructing two JSON objects (`schema` and `uischema`) that define the structure and layout of the form. **Unfortunately, I couldn't find a prebuilt, out-of-the box formbuilder that is compatible with jsonforms.io.**
+## Installation
 
-## Running
+```bash
+npm install plnet-form-builder
+```
 
-Run `npm run sart` or `docker-compose up`
+## Usage
 
-## TODO:
+### Basic Usage
 
-### Housekeeping
-- replace react-json-editor-ajrm (deprecated lib)
-- actions all `TODO`s in code
-- add SASS + styles
-- add jest unit tests
-- add husky + prettier hooks
-- have fun with the frontend
-- add singular error handler to Koa
+```jsx
+import React from 'react';
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+import { FormBuilderApp, formBuilderSlice } from 'plnet-form-builder';
+
+const store = configureStore({
+  reducer: {
+    formBuilder: formBuilderSlice,
+  },
+});
+
+function App() {
+  return (
+    <Provider store={store}>
+      <FormBuilderApp />
+    </Provider>
+  );
+}
+
+export default App;
+```
+
+### Individual Components
+
+```jsx
+import { 
+  FormBuilderComponent,
+  FormBuilderCanvas,
+  ToolBoxComponent,
+  CustomTextFieldComponent
+} from 'plnet-form-builder';
+```
+
+## Available Field Types
+
+- Text Field
+- Number Field
+- Text Area
+- Password Field
+- Date Picker
+- Time Picker
+- Radio Buttons
+- Select Dropdown
+- Multi-Select
+- Header/Divider
+
+## Development
+
+### Demo Application
+
+To run the demo application:
+
+```bash
+npm install
+npm run demo
+```
+
+### Building the Package
+
+```bash
+npm run build:lib
+```
+
+### Development Mode
+
+```bash
+npm run dev
+```
+
+## Dependencies
+
+This package requires the following peer dependencies:
+
+- React ^18.2.0
+- React DOM ^18.2.0
+
+## License
+
+MIT
+
+## Contributing
+
+This component was extracted from the PLNet-Link CRM application developed by Cedar Pine Consulting for Para Los Ninos.

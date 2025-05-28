@@ -1,15 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+export { default as FormBuilderApp } from './components/FormBuilderApp.jsx';
+export { default as FormBuilderComponent } from './components/FormBuilder/FormBuilderComponent.jsx';
+export { default as FormBuilderCanvas } from './components/FormBuilder/FormBuilderCanvas.jsx';
+export { default as ToolBoxComponent } from './components/FormBuilder/ToolBoxComponent.jsx';
+export { default as CanvasFormComponent } from './components/FormBuilder/CanvasFormComponent.jsx';
+export { default as CanvasJSONEditFormComponent } from './components/FormBuilder/CanvasJSONEditFormComponent.jsx';
+export { default as CanvasSafeEditFormComponent } from './components/FormBuilder/CanvasSafeEditFormComponent.jsx';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-    <App />
-);
+// Export custom widgets
+export * from './components/customWidgets.jsx';
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+// Export store
+export * from './store/slice.js';
+export * from './store/selectors.js';
+
+// Export utilities
+export * from './components/utils.js';
