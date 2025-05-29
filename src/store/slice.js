@@ -10,7 +10,6 @@ import {
 const initialState = {
   jsonSchema: emptyFormSchema,
   uiSchema: emptyUISchema,
-  departmentID: null,
   editMode: "safe",
   showPreview: false,
   submitAttempted: false,
@@ -26,7 +25,6 @@ const formsSlice = createSlice({
       // console.log("resetFormBuilderState");
       state.jsonSchema = emptyFormSchema;
       state.uiSchema = emptyUISchema;
-      state.departmentID = null;
       state.editMode = "safe";
       state.showPreview = false;
       state.submitAttempted = false;
@@ -83,9 +81,6 @@ const formsSlice = createSlice({
     },
     setFormTitle: (state, action) => {
       state.jsonSchema.title = action.payload;
-    },
-    setDepartmentId: (state, action) => {
-      state.departmentID = action.payload;
     },
     setDescription: (state, action) => {
       // TODO: any description validation?
@@ -188,7 +183,6 @@ export const {
   moveFormComponent,
   setFormTitle,
   setFormStatus,
-  setDepartmentId,
   setDescription,
   setFormComponentTitle,
   setFormComponentJSONSchema,
@@ -196,7 +190,6 @@ export const {
   setJSONSchema,
   setUISchema,
   setShowPreview,
-  setSubmitAttempted,
   resetFormBuilderState,
   toggleComponentRequired,
   toggleEditMode,

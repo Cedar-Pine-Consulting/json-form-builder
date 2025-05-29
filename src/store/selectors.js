@@ -3,7 +3,6 @@ import { createSelector } from "@reduxjs/toolkit";
 export const selectJSONSchema = (state) => state.formBuilder.jsonSchema;
 export const selectUISchema = (state) => state.formBuilder.uiSchema;
 export const selectData = (state) => state.formBuilder.data;
-export const selectDepartmentId = (state) => state.formBuilder.departmentID;
 export const selectShowPreview = (state) => state.formBuilder.showPreview;
 export const selectEditMode = (state) => state.formBuilder.editMode;
 export const selectUIOrder = (state) => state.formBuilder.uiSchema["ui:order"];
@@ -22,13 +21,10 @@ export const selectSubmitAttempted = (state) =>
   state.formBuilder.submitAttempted;
 
 export const selectErrors = createSelector(
-  [selectDepartmentId, selectJSONSchema, selectUISchema],
-  (departmentID, jsonSchema) => {
+  [selectJSONSchema, selectUISchema],
+  (jsonSchema) => {
     // wipe out errors each time
     const errorObj = {};
-    if (!departmentID || departmentID === "") {
-      errorObj.department = "Department Required!";
-    }
     if (!jsonSchema?.description || jsonSchema?.description === "") {
       errorObj.description = "Description Required!";
     }

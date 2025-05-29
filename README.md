@@ -1,15 +1,17 @@
-# PLNet Form Builder
+# JSON Form Builder
 
-A standalone React form builder component extracted from the PLNet-Link CRM application. This component provides a drag-and-drop interface for creating dynamic forms with JSON Schema support.
+A Drag and Drop Form Builder built on top of [RJSF](https://rjsf-team.github.io/react-jsonschema-form)
+
+## Why
+
+[RJSF](https://rjsf-team.github.io/react-jsonschema-form) is a great standard for defining forms in terms of [JSON Schemas](https://json-schema.org). This demo shows how easy it is to build a featureful visual form builder tool on top of RJSF.
 
 ## Features
 
-- 🎯 Drag and drop form builder interface
-- 📝 JSON Schema based form generation
-- 🎨 Material-UI components
-- 🔧 Customizable field types
-- 📱 Responsive design
-- 🎭 React JSON Schema Form (RJSF) integration
+- Drag and drop form builder interface
+- JSON Schema based form generation
+- Material-UI components
+- Customizable field types
 
 ## Installation
 
@@ -91,17 +93,6 @@ npm run build:lib
 npm run dev
 ```
 
-## Dependencies
-
-This package requires the following peer dependencies:
-
-- React ^18.2.0
-- React DOM ^18.2.0
-
 ## License
 
 MIT
-
-## Contributing
-
-This component was extracted from the PLNet-Link CRM application developed by Cedar Pine Consulting for Para Los Ninos.

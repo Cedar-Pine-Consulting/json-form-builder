@@ -7,10 +7,10 @@ function App() {
     <Container maxWidth="xl">
       <Box sx={{ my: 4 }}>
         <Typography variant="h2" component="h1" gutterBottom>
-          PLNet Form Builder Demo
+          JSON Form Builder Demo
         </Typography>
         <Typography variant="h6" component="h2" gutterBottom sx={{ mb: 4 }}>
-          Drag and drop form builder extracted from PLNet-Link CRM
+          Drag and drop form builder based on RJSF
         </Typography>
         <FormBuilderApp />
       </Box>
