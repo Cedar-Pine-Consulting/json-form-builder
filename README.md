@@ -1,24 +1,98 @@
-# JSON Form Builder Component
+# JSON Form Builder
 
-Builing forms with jsonforms.io, ajv.js and postgres JSON fields.
+A Drag and Drop Form Builder built on top of [RJSF](https://rjsf-team.github.io/react-jsonschema-form)
 
-## JSON Schema and jsonforms.io
+## Why
 
-The app architecture is centered around JSON Forms as defined in a JSON Schema. There are several form libraries that use JSON Schema to define forms, one of the best one's is [jsonforms.io](https://jsonforms.io/). The library is well mantained and has extensive documentation and deep extensibility.
+[RJSF](https://rjsf-team.github.io/react-jsonschema-form) is a great standard for defining forms in terms of [JSON Schemas](https://json-schema.org). This demo shows how easy it is to build a featureful visual form builder tool on top of RJSF.
 
-In essence, the FormBuilder component is just constructing two JSON objects (`schema` and `uischema`) that define the structure and layout of the form. **Unfortunately, I couldn't find a prebuilt, out-of-the box formbuilder that is compatible with jsonforms.io.**
+## Features
 
-## Running
+- Drag and drop form builder interface
+- JSON Schema based form generation
+- Material-UI components
+- Customizable field types
 
-Run `npm run sart` or `docker-compose up`
+## Installation
 
-## TODO:
+```bash
+npm install plnet-form-builder
+```
 
-### Housekeeping
-- replace react-json-editor-ajrm (deprecated lib)
-- actions all `TODO`s in code
-- add SASS + styles
-- add jest unit tests
-- add husky + prettier hooks
-- have fun with the frontend
-- add singular error handler to Koa
+## Usage
+
+### Basic Usage
+
+```jsx
+import React from 'react';
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+import { FormBuilderApp, formBuilderSlice } from 'plnet-form-builder';
+
+const store = configureStore({
+  reducer: {
+    formBuilder: formBuilderSlice,
+  },
+});
+
+function App() {
+  return (
+    <Provider store={store}>
+      <FormBuilderApp />
+    </Provider>
+  );
+}
+
+export default App;
+```
+
+### Individual Components
+
+```jsx
+import { 
+  FormBuilderComponent,
+  FormBuilderCanvas,
+  ToolBoxComponent,
+  CustomTextFieldComponent
+} from 'plnet-form-builder';
+```
+
+## Available Field Types
+
+- Text Field
+- Number Field
+- Text Area
+- Password Field
+- Date Picker
+- Time Picker
+- Radio Buttons
+- Select Dropdown
+- Multi-Select
+- Header/Divider
+
+## Development
+
+### Demo Application
+
+To run the demo application:
+
+```bash
+npm install
+npm run demo
+```
+
+### Building the Package
+
+```bash
+npm run build:lib
+```
+
+### Development Mode
+
+```bash
+npm run dev
+```
+
+## License
+
+MIT
