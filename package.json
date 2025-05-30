@@ -9,6 +9,7 @@
     "dev": "vite",
     "build": "vite build",
     "build:lib": "vite build --mode lib",
+    "build:demo": "vite build --config demo/vite.config.js",
     "preview": "vite preview",
     "demo": "vite --config demo/vite.config.js",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
