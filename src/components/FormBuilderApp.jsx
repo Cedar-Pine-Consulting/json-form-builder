@@ -88,6 +88,14 @@ function FormBuilderApp({ formTemplate }) {
     setIsExpanded(expanded ? panel : false);
   };
 
+  const handleCopyJSONSchema = () => {
+    navigator.clipboard.writeText(JSON.stringify(jsonSchema, null, 2));
+  };
+
+  const handleCopyUISchema = () => {
+    navigator.clipboard.writeText(JSON.stringify(uiSchema, null, 2));
+  };
+
   const editorOptions = {
     mode: "json",
     lineWrapping: true,
@@ -204,6 +212,7 @@ function FormBuilderApp({ formTemplate }) {
                   readOnly
                   value={JSON.stringify(jsonSchema, null, 2)}
                 />
+                <Button onClick={handleCopyJSONSchema}>Copy</Button>
               </Stack>
               <Stack direction="column" spacing={2}>
                 UI Schema:
@@ -212,6 +221,7 @@ function FormBuilderApp({ formTemplate }) {
                   readOnly
                   value={JSON.stringify(uiSchema, null, 2)}
                 />
+                <Button onClick={handleCopyUISchema}>Copy</Button>
               </Stack>
           </DialogContent>
         </Dialog>
