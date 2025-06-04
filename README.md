@@ -2,6 +2,8 @@
 
 A Drag and Drop Form Builder built on top of [RJSF](https://rjsf-team.github.io/react-jsonschema-form)
 
+[Demo](https://cedar-pine-consulting.github.io/json-form-builder/)
+
 ## Why
 
 [RJSF](https://rjsf-team.github.io/react-jsonschema-form) is a great standard for defining forms in terms of [JSON Schemas](https://json-schema.org). This demo shows how easy it is to build a featureful visual form builder tool on top of RJSF.
