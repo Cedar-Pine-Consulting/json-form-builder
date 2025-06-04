@@ -20,7 +20,8 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-
+import SaveIcon from "@mui/icons-material/Save";
+import CodeMirror from "@uiw/react-codemirror";
 import { useDispatch, useSelector } from "react-redux";
 import FormBuilderComponent from "./FormBuilder/FormBuilderComponent";
 import Input from "./Input/Input";
@@ -32,6 +33,7 @@ import {
   selectShowPreview,
   selectErrors,
   selectSubmitAttempted,
+  selectShowSchemaPreview,
 } from "../store/selectors";
 
 import {
@@ -40,6 +42,7 @@ import {
   setJSONSchema,
   setUISchema,
   setShowPreview,
+  setShowSchemaPreview,
 } from "../store/slice";
 import "../styles/formBuilder.css";
 
@@ -56,6 +59,7 @@ function FormBuilderApp({ formTemplate }) {
   const showPreview = useSelector(selectShowPreview);
   const errors = useSelector(selectErrors);
   const submitted = useSelector(selectSubmitAttempted);
+  const showSchemaPreview = useSelector(selectShowSchemaPreview);
 
   const onChangeFormTitle = (e) => {
     dispatch(setFormTitle(e.target.value));
@@ -76,9 +80,19 @@ function FormBuilderApp({ formTemplate }) {
     dispatch(setShowPreview());
   };
 
+  const handleSave = () => {
+    dispatch(setShowSchemaPreview());
+  };
+
   const toggleAccordion = (panel) => (event, expanded) => {
     setIsExpanded(expanded ? panel : false);
   };
+
+  const editorOptions = {
+    mode: "json",
+    lineWrapping: true,
+  };
+
 
   return (
     <div className="App">
@@ -175,6 +189,33 @@ function FormBuilderApp({ formTemplate }) {
             />
           </DialogContent>
         </Dialog>
+        <Dialog
+          fullWidth
+          maxWidth="sm"
+          open={showSchemaPreview}
+          onClose={handleSave}
+        >
+          <DialogTitle>Form Schemas</DialogTitle>
+          <DialogContent>
+              <Stack direction="column" spacing={2}>
+                JSON Schema:
+                <CodeMirror
+                  options={editorOptions}
+                  readOnly
+                  value={JSON.stringify(jsonSchema, null, 2)}
+                />
+              </Stack>
+              <Stack direction="column" spacing={2}>
+                UI Schema:
+                <CodeMirror
+                  options={editorOptions}
+                  readOnly
+                  value={JSON.stringify(uiSchema, null, 2)}
+                />
+              </Stack>
+          </DialogContent>
+        </Dialog>
+
         <AppBar
           position="fixed"
           sx={{ top: "auto", bottom: 0, backgroundColor: "white" }}
@@ -190,6 +231,16 @@ function FormBuilderApp({ formTemplate }) {
               }
             >
               Preview
+            </Button>
+            <Button
+              variant="contained"
+              onClick={handleSave}
+              startIcon={<SaveIcon />}
+              disabled={
+                Object.keys(jsonSchema.properties).length === 0 || showPreview
+              }
+            >
+              Save Form Template
             </Button>
           </Toolbar>
         </AppBar>

@@ -19,6 +19,8 @@ export const selectFormComponentOrderIndexById = (state, id) =>
   state.formBuilder.uiSchema["ui:order"].indexOf(id);
 export const selectSubmitAttempted = (state) =>
   state.formBuilder.submitAttempted;
+export const selectShowSchemaPreview = (state) =>
+  state.formBuilder.showSchemaPreview;
 
 export const selectErrors = createSelector(
   [selectJSONSchema, selectUISchema],

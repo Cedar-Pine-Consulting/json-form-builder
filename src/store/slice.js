@@ -13,6 +13,7 @@ const initialState = {
   editMode: "safe",
   showPreview: false,
   submitAttempted: false,
+  showSchemaPreview: false,
   isLoading: false,
 };
 
@@ -96,6 +97,9 @@ const formsSlice = createSlice({
     },
     setShowPreview: (state) => {
       state.showPreview = !state.showPreview;
+    },
+    setShowSchemaPreview: (state, action) => {
+      state.showSchemaPreview = !state.showSchemaPreview;
     },
     setSubmitAttempted: (state) => {
       state.submitAttempted = true;
@@ -190,6 +194,7 @@ export const {
   setJSONSchema,
   setUISchema,
   setShowPreview,
+  setShowSchemaPreview,
   resetFormBuilderState,
   toggleComponentRequired,
   toggleEditMode,
