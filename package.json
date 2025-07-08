@@ -1,7 +1,7 @@
 {
-  "name": "plnet-form-builder",
+  "name": "json-form-builder",
   "version": "1.0.0",
-  "description": "Standalone Form Builder component extracted from PLNet-Link CRM",
+  "description": "DnD Form Builder component based on RJSF",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "type": "module",

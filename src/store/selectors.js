@@ -22,6 +22,7 @@ export const selectSubmitAttempted = (state) =>
 export const selectShowSchemaPreview = (state) =>
   state.formBuilder.showSchemaPreview;
 
+
 export const selectErrors = createSelector(
   [selectJSONSchema, selectUISchema],
   (jsonSchema) => {

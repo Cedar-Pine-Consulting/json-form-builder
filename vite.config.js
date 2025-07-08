@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => {
       build: {
         lib: {
           entry: resolve(__dirname, 'src/index.js'),
-          name: 'PLNetFormBuilder',
+          name: 'JSONFormBuilder',
           formats: ['es', 'umd'],
           fileName: (format) => `index.${format === 'es' ? 'esm' : format}.js`,
         },

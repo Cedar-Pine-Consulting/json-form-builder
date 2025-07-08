@@ -18,7 +18,7 @@ A Drag and Drop Form Builder built on top of [RJSF](https://rjsf-team.github.io/
 ## Installation
 
 ```bash
-npm install plnet-form-builder
+npm install json-form-builder
 ```
 
 ## Usage
@@ -29,7 +29,7 @@ npm install plnet-form-builder
 import React from 'react';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
-import { FormBuilderApp, formBuilderSlice } from 'plnet-form-builder';
+import { FormBuilderApp, formBuilderSlice } from 'json-form-builder';
 
 const store = configureStore({
   reducer: {
@@ -56,7 +56,7 @@ import {
   FormBuilderCanvas,
   ToolBoxComponent,
   CustomTextFieldComponent
-} from 'plnet-form-builder';
+} from 'json-form-builder';
 ```
 
 ## Available Field Types
