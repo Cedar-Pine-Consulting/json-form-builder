@@ -26,17 +26,3 @@ export const groupBy = (arr, criteria) =>
     // Return the object to the next item in the loop
     return obj;
   }, {});
-
-export const handleLogout = (navigate) => {
-  toast.success("Successfully Signed Out!");
-  localStorage.removeItem("user");
-  localStorage.removeItem("token");
-  // remove SSO cookies
-  // TODO: stash in constants
-  document.cookie =
-    "plnet:token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-  document.cookie =
-    "plnet:user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-
-  navigate("/login", { replace: true });
-};
