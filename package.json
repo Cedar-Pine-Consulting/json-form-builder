@@ -6,7 +6,7 @@
   "module": "dist/index.esm.js",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --config vite.localconfig.js",
     "build": "vite build",
     "build:lib": "vite build --mode lib",
     "build:demo": "vite build --config demo/vite.config.js",
