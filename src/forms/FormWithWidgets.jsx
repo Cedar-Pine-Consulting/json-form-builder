@@ -13,6 +13,7 @@ import {
   CustomDateFieldComponent,
   CustomTimeFieldComponent,
 } from "../components/customWidgets";
+import RichTextRootDescriptionField from "./RichTextRootDescriptionField.jsx";
 
 function FormWithWidgets({
   schema,
@@ -35,6 +36,9 @@ function FormWithWidgets({
       onSubmit={onSubmit}
       // eslint-disable-next-line react/no-children-prop
       children={children}
+      templates={{
+        DescriptionFieldTemplate: RichTextRootDescriptionField,
+      }}
       widgets={{
         TextWidget: CustomTextFieldComponent,
         UpDownWidget: CustomNumberFieldComponent,

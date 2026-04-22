@@ -7,7 +7,7 @@ function App() {
     <Container maxWidth="xl">
       <Box sx={{ my: 4 }}>
         <Typography variant="h2" component="h1" gutterBottom>
-          JSON Form Builder Demo
+          JSON Form Builder
         </Typography>
         {/* <Typography variant="h6" component="h4"> */}
         {/*   <a href="https://github.com/cedar-Pine-Consulting/json-form-builder/">Repo</a> */}

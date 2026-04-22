@@ -6,7 +6,7 @@
   "module": "dist/index.esm.js",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --config demo/vite.config.js",
     "build": "vite build",
     "build:lib": "vite build --mode lib",
     "build:demo": "vite build --config demo/vite.config.js",
@@ -45,6 +45,7 @@
     "@tiptap/starter-kit": "^2.11.5",
     "@uiw/react-codemirror": "^4.21.20",
     "dayjs": "^1.11.9",
+    "dompurify": "^3.2.4",
     "humps": "^2.0.1",
     "react-beautiful-dnd": "^13.1.1",
     "react-redux": "^8.1.1",
